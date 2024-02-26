@@ -1,0 +1,16 @@
+stages:
+  - build
+#   - deploy
+
+build:
+  tags:
+    - local_docker
+
+  stage: build
+  image: node:18-alpine
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build/
