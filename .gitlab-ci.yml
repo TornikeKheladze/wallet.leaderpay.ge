@@ -9,21 +9,21 @@ stages:
   - build
   - deploy
 
-# build:
-#   tags:
-#     - local_docker
-#   stage: build
-#   image: node:18-alpine
-#   script:
-#     - npm install
-#     - npm run build
-#   artifacts:
-#     paths:
-#       - dist/
+build:
+  tags:
+    - local_docker
+  stage: build
+  image: node:18-alpine
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
 
-#   only:
-#     variables:
-#       - $CI_COMMIT_BRANCH == $BRANCH_NAME
+  only:
+    variables:
+      - $CI_COMMIT_BRANCH == $BRANCH_NAME
 
 
 deploy:
