@@ -1,16 +1,46 @@
+variables:
+    SSH_HOST: 80.241.252.36
+    SSH_USER: www
+    PROJECT_DIR: /var/www/wallet.leaderpay.ge
+    BRANCH_NAME: main
+
+
 stages:
   - build
-#   - deploy
+  - deploy
 
-build:
+# build:
+#   tags:
+#     - local_docker
+#   stage: build
+#   image: node:18-alpine
+#   script:
+#     - npm install
+#     - npm run build
+#   artifacts:
+#     paths:
+#       - dist/
+
+#   only:
+#     variables:
+#       - $CI_COMMIT_BRANCH == $BRANCH_NAME
+
+
+deploy:
   tags:
     - local_docker
-
-  stage: build
-  image: node:18-alpine
+  stage: deploy
+  image: alpine:latest
   script:
-    - npm install
-    - npm run build
-  artifacts:
-    paths:
-      - dist/
+    - apk add --no-cache openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -  
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts  
+    - scp -r dist/* $SSH_USER@$SSH_HOST:$PROJECT_DIR
+
+  only:
+    variables:
+      - $CI_COMMIT_BRANCH == $BRANCH_NAME
+
