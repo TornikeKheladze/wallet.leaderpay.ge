@@ -1,0 +1,123 @@
+@font-face {
+  font-family: "raleway";
+  src:
+    local("raleway"),
+    url(./assets/fonts/Raleway.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "raleway_italic";
+  src:
+    local("raleway_italic"),
+    url(./assets/fonts/Raleway_Italic.ttf) format("truetype");
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Roboto Mono", monospace, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  z-index: 0;
+
+  /* color-scheme: light dark; */
+  /* color: rgba(255, 255, 255, 0.87); */
+  background-color: #0b0e11;
+
+  /* background-color: #0e0e13; */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+}
+
+body {
+  margin: 0;
+  color: #eaecef;
+}
+
+button {
+  cursor: pointer;
+}
+
+svg {
+  width: 30px;
+  height: 30px;
+}
+
+.card {
+  @apply mx-auto md:w-5/6 w-[90%] bg-bgCard rounded-lg shadow-xl;
+}
+
+.transfer_icon {
+  @apply bg-buttonGray group-hover:bg-primaryYellowHover hover:text-textBlack rounded-full p-2 transition-colors duration-300;
+}
+
+.transfer_icon_txt {
+  @apply text-center group-hover:text-primaryYellowHover transition-colors duration-300;
+}
+
+.button_primary {
+  @apply rounded p-2 bg-primaryYellow text-textBlack hover:bg-primaryYellowHover transition-all duration-300;
+}
+.input {
+  @apply w-full py-3 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 text-textBlack;
+}
+
+.form_input {
+  @apply shadow 
+    appearance-none 
+    border 
+    rounded 
+    w-full 
+    h-11 
+    py-2 
+    px-3 
+    text-gray-700 
+    bg-gray-200
+    leading-tight 
+    focus:outline-none 
+    focus:ring-1
+    focus:ring-primaryYellow
+    focus:border-primaryYellow;
+}
+@layer base {
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 8px; /* Adjust this value to change the scrollbar height */
+  border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  /* border-radius: 10px; */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
