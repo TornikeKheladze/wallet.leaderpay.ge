@@ -1,5 +1,5 @@
 variables:
-    SSH_HOST: 80.241.252.36
+    SSH_HOST: 172.26.0.230
     SSH_USER: www
     PROJECT_DIR: /var/www/wallet.leaderpay.ge
     BRANCH_NAME: main
