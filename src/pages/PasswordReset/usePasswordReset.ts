@@ -43,7 +43,7 @@ export const usePasswordReset = () => {
     onSuccess() {
       toast.success(t("passwordChanged"));
       setTimeout(() => {
-        navigate("/login");
+        navigate("/");
       }, 2000);
     },
   });
