@@ -7,6 +7,7 @@ import LoginIcon from "../../assets/icons/LoginIcon";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import logoSrc from "../../assets/icons/LPlogo (copy).png";
+import MobileSidebar from "./sidebar/MobileSidebar";
 
 const BlankLayout: React.FC<{ children: ReactNode; login?: boolean }> = ({
   children,
@@ -56,6 +57,9 @@ const BlankLayout: React.FC<{ children: ReactNode; login?: boolean }> = ({
         {children}
       </div>
       <Footer />
+      <div className="md:hidden flex">
+        <MobileSidebar />
+      </div>
       <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );

@@ -8,7 +8,7 @@ const Register = () => {
 
   return (
     <div className="sm:flex max-w-md justify-center md:py-10 py-5 overflow-hidden z-10 mx-auto">
-      <div className="bg-bgCard px-8 pb-5 md:pt-32 pt-20 rounded-lg shadow-xl relative">
+      <div className="bg-bgCard md:mb-0 mb-8 px-8 pb-5 md:pt-32 pt-20 rounded-lg shadow-xl relative">
         <Logo />
         <div className="flex items-center justify-between mb-8">
           <p className="text-textPrimary text-xl">{t("register")}</p>

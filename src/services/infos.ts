@@ -35,3 +35,7 @@ export const getNewsList = () => {
 export const getSingleNew = (id: any) => {
   return instance.post(`news/get/${id}`);
 };
+
+export const sendMessage = async (data: any) => {
+  return instance.post("/landing/contact", data);
+};

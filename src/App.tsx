@@ -26,6 +26,7 @@ import VerificationStep2 from "./pages/Verification/VerificationStep2";
 import Cashout from "./pages/Cashout/Cashout";
 import AddBalance from "./pages/AddBalance/AddBalance";
 import QRCashout from "./pages/QRCashout/QRCashout";
+import Contact from "./pages/Contact/Contact";
 
 const route = (
   path: string,
@@ -50,6 +51,7 @@ function App() {
     <Routes>
       {route("/", <Login />, "blank")}
       {route("/register", <Register />, "blank")}
+      {route("/contact", <Contact />, "blank")}
       <Route path={"register/identomat"} element={<Identomat />} />
       {route("/pages/:page", <Info />, "blank", true)}
       {route("/news", <News />, "blank", true)}
