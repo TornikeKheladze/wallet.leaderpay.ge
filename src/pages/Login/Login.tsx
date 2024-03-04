@@ -32,7 +32,7 @@ const Login = () => {
         <Logo />
         <div className="flex items-center justify-between mb-8">
           <p className="text-textPrimary">{t("signInToWallet")}</p>
-          <LanguageSwitcher />
+          <LanguageSwitcher className="text-textPrimary hover:bg-gray-800" />
         </div>
         {checkLoginData ? (
           <div className="flex flex-col gap-3 mt-6">

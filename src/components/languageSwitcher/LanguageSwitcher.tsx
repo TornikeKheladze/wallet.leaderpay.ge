@@ -9,14 +9,20 @@ const languages = [
   { code: "ru", label: "Rus", icon: <RussianFlagIcon /> },
 ];
 
-const LanguageSwitcher: React.FC = () => {
+const LanguageSwitcher: React.FC<{ className?: string }> = ({ className }) => {
   const { dropdownRef, isOpen, setIsOpen, handleLanguageChange, lang } =
     useLanguageSwitcher();
 
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        className="rounded-md flex justify-between items-center gap-1 text-sm text-textBlack bg-primaryYellow hover:bg-primaryYellowHover w-16 p-1 focus:outline-none transition-all duration-300"
+        className={`rounded-md flex justify-between items-center gap-1 text-sm w-16 p-1 focus:outline-none transition-all duration-300 
+        ${
+          className
+            ? className
+            : "text-textBlack bg-primaryYellow hover:bg-primaryYellowHover"
+        }
+        `}
         onClick={() => setIsOpen(!isOpen)}
       >
         {languages.find((item) => item.code === lang)?.label}
