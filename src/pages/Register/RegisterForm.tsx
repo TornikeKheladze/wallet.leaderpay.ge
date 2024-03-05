@@ -93,6 +93,10 @@ const RegisterForm: React.FC<FormProps> = ({
     return flds;
   };
 
+  const openPdfExternalBrowser = (link?: string) => {
+    window.open(link, "_blank", "width=500,height=400");
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mx-auto flex flex-col">
       <Modal isOpen={pepInfoModal} setIsOpen={setPepInfoModal}>
@@ -127,8 +131,7 @@ const RegisterForm: React.FC<FormProps> = ({
                   {t("agreeTerms")}
                 </label>
                 <a
-                  target="_blank"
-                  href={field.link}
+                  onClick={() => openPdfExternalBrowser(field.link)}
                   className="text-blue-500 underline hover:text-blue-800 mr-4"
                 >
                   {t(field.label)}
