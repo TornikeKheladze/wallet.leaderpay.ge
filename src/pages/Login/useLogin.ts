@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslate } from "../../hooks/useTranslate";
-import { useMutation } from "react-query";
-import { login, loginCheck } from "../../services/authorization";
+import { useMutation, useQuery } from "react-query";
+import { getUserInfo, login, loginCheck } from "../../services/authorization";
 import {
   CheckLoginPayload,
   CheckLoginResponse,
@@ -10,12 +10,24 @@ import {
 } from "../../types/login";
 import { useState } from "react";
 import { authTranslations } from "../../lang/authTranslations";
+import { saveUser } from "../../store/userSlice";
+import { useDispatch } from "react-redux";
 
 export const useLogin = () => {
   const { t } = useTranslate(authTranslations);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [smsInput, setSmsInput] = useState<number | string>();
+
+  useQuery({
+    queryKey: "getUserInfo",
+    queryFn: getUserInfo,
+    onSuccess: (data) => {
+      dispatch(saveUser(data.data));
+      navigate("/home");
+    },
+  });
 
   const {
     mutate: mutateCheck,
