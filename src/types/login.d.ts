@@ -9,7 +9,13 @@ export type CheckLoginPayload = {
 };
 
 export type CheckLoginResponse = {
-  data: { phone: string; token: string; date: string; message: string };
+  data: {
+    phone: string;
+    token: string;
+    date: string;
+    message: string;
+    access_token?: string;
+  };
 };
 
 export type UserData = {

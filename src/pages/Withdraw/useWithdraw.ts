@@ -128,6 +128,9 @@ export const useWithDraw = () => {
     onSuccess(data) {
       window.location.href = data.data.url;
     },
+    onError(data) {
+      toast.error(data.response.data.errorMessage);
+    },
   });
 
   const cardList: Card[] = cardData?.data.data || [];

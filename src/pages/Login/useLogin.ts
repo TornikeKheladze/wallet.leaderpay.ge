@@ -34,7 +34,18 @@ export const useLogin = () => {
     data: checkLoginData,
     isLoading: checkLoading,
     isError: checkError,
-  } = useMutation<CheckLoginResponse, any, CheckLoginPayload>(loginCheck);
+  } = useMutation<CheckLoginResponse, any, CheckLoginPayload>({
+    mutationFn: loginCheck,
+    onSuccess(data) {
+      if (data.data.access_token) {
+        localStorage.setItem(
+          "access_token",
+          JSON.stringify(data.data.access_token)
+        );
+        navigate("/home");
+      }
+    },
+  });
 
   const {
     mutate: mutateLogin,

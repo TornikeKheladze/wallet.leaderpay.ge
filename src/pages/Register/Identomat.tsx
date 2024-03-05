@@ -17,7 +17,7 @@ const Identomat: React.FC = () => {
     onSuccess() {
       setSuccessModal(true);
       setTimeout(() => {
-        navigate("/login");
+        navigate("/");
         localStorage.removeItem("iframe_url");
         localStorage.removeItem("token");
       }, 2000);

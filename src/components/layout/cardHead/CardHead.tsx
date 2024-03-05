@@ -23,8 +23,6 @@ const CardHead: React.FC = () => {
       .then(() => toast.success(t("textCopied")));
   };
 
-  console.log(user);
-
   return (
     <div
       className={`${
