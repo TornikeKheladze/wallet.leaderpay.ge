@@ -23,6 +23,8 @@ const CardHead: React.FC = () => {
       .then(() => toast.success(t("textCopied")));
   };
 
+  console.log(user);
+
   return (
     <div
       className={`${
@@ -86,7 +88,7 @@ const CardHead: React.FC = () => {
           className="flex flex-col justify-center items-center border-r border-l px-2 border-buttonGray hover:bg-primaryYellowHover hover:text-textBlack transition-colors duration-300 rounded-md"
         >
           <span>{t("balance")} </span>
-          <span>{user.balance}$</span>
+          <span>{user.balance_usd}$</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -103,7 +105,7 @@ const CardHead: React.FC = () => {
           className="flex flex-col justify-center items-center border-r border-l px-2 border-buttonGray hover:bg-primaryYellowHover hover:text-textBlack transition-colors duration-300 rounded-md"
         >
           <span>{t("balance")} </span>
-          <span>{user.balance}₽</span>
+          <span>{user.balance_rub}₽</span>
         </button>
       </Tooltip>
       <Tooltip
@@ -120,7 +122,7 @@ const CardHead: React.FC = () => {
           className="flex flex-col justify-center items-center border-r border-l px-2 border-buttonGray hover:bg-primaryYellowHover hover:text-textBlack transition-colors duration-300 rounded-md"
         >
           <span>{t("balance")} </span>
-          <span>{user.balance}€</span>
+          <span>{user.balance_eur}€</span>
         </button>
       </Tooltip>
       <div className="flex flex-col items-center justify-center order-last">
