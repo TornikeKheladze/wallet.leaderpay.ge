@@ -29,8 +29,6 @@ const Contact = () => {
     queryKey: ["getContact"],
   });
 
-  console.log(data);
-
   const submitHandler = (data: any) => {
     messageMutate(data);
   };

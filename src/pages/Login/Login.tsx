@@ -6,6 +6,7 @@ import LoadingSpinner from "../../components/layout/loadingSpinner/LoadingSpinne
 import { useLogin } from "./useLogin";
 import LanguageSwitcher from "../../components/languageSwitcher/LanguageSwitcher";
 import Logo from "../../components/logo/Logo";
+import logoSrc from "../../assets/icons/LPlogo (copy).png";
 
 const Login = () => {
   const {
@@ -20,6 +21,7 @@ const Login = () => {
     checkError,
     checkLoading,
     onFormSubmit,
+    userInfoLoading,
   } = useLogin();
 
   // <div className="mx-7 sm:flex justify-center py-10 2xl:mt-24 mt-9 overflow-hidden z-10">
@@ -28,6 +30,11 @@ const Login = () => {
 
   return (
     <div className="mx-7 sm:flex justify-center md:py-10 py-5 overflow-hidden z-10 ">
+      {userInfoLoading && (
+        <div className="fixed bg-bgCard top-0 left-0 w-screen h-screen z-50 flex items-center justify-center">
+          <img className="animate-bounce" src={logoSrc} />
+        </div>
+      )}
       <div className="bg-bgCard px-8 pb-5 md:pt-32 pt-20 rounded-lg shadow-xl sm:w-400 relative">
         <Logo />
         <div className="flex items-center justify-between mb-8">

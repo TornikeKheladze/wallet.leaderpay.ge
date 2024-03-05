@@ -57,7 +57,8 @@ const ServiceSearch = () => {
   };
 
   const handleSuggestionClick = (value: Service) => {
-    let serviceUrl = `/services/${value.id}`;
+    const token = localStorage.getItem("access_token");
+    let serviceUrl = `${token ? "/services/" : "/guest/services/"}${value.id}`;
     if (value.id === "2") {
       serviceUrl = `/services/2?service_id=2&&&&personal_number=${user.wallet_number}&&&&birthdate=${user.birth_date}&&&&`;
     }
