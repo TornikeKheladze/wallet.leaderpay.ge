@@ -110,7 +110,7 @@ const RegisterForm: React.FC<FormProps> = ({
       <Modal
         isOpen={pdfModal}
         setIsOpen={setPdfModal}
-        closeClassname="!top-10 !right-8"
+        closeClassname="!top-20 md:!top-10 !left-8"
       >
         <div>
           <iframe
