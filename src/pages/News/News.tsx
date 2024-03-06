@@ -73,7 +73,7 @@ const News = () => {
                   </span>
                 </p>
               </div>
-              <div className="w-full h-1/3 absolute left-0 bottom-0 bg-white flex flex-col items-center">
+              <div className="w-full h-1/3 absolute left-0 bottom-0 bg-white text-textBlack flex flex-col items-center">
                 <h4 className="text-center">{newsData.title[lang]}</h4>
                 <p className="text-xs text-center">{partOfText}...</p>
               </div>
