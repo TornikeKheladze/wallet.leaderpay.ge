@@ -47,6 +47,8 @@ const RegisterForm: React.FC<FormProps> = ({
   const pep_family_status = useWatch({ control, name: "pep_family_status" });
   const [pepInfoModal, setPepInfoModal] = useState(false);
   const [pepFamilyInfoModal, setPepFamilyInfoModal] = useState(false);
+  const [pdfModal, setPdfModal] = useState(false);
+  const [pdfSrc, setPdfSrc] = useState("");
 
   const { t } = useTranslate(formTranslations, authTranslations);
 
@@ -105,6 +107,18 @@ const RegisterForm: React.FC<FormProps> = ({
           {registerParams?.pep_family_definition}
         </div>
       </Modal>
+      <Modal
+        isOpen={pdfModal}
+        setIsOpen={setPdfModal}
+        closeClassname="!top-10 !right-8"
+      >
+        <div>
+          <iframe
+            className="mt-10 top-0 left-0 h-screen w-screen z-100"
+            src={pdfSrc}
+          ></iframe>
+        </div>
+      </Modal>
 
       {allFields().map((field, index) => {
         const errorMessage = (errors[field.name] as any)?.message
@@ -126,13 +140,15 @@ const RegisterForm: React.FC<FormProps> = ({
                 >
                   {t("agreeTerms")}
                 </label>
-                <a
-                  href={`/file/${field.name}`}
-                  target="_blank"
-                  className="text-blue-500 underline hover:text-blue-800 mr-4"
+                <span
+                  onClick={() => {
+                    setPdfSrc(field.link || "");
+                    setPdfModal(true);
+                  }}
+                  className="text-blue-500 underline hover:text-blue-800 mr-4 cursor-pointer"
                 >
                   {t(field.label)}
-                </a>
+                </span>
                 {field.validation ? (
                   <span className="mr-1 text-red-500">*</span>
                 ) : (

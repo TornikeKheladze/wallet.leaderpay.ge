@@ -27,7 +27,6 @@ import Cashout from "./pages/Cashout/Cashout";
 import AddBalance from "./pages/AddBalance/AddBalance";
 import QRCashout from "./pages/QRCashout/QRCashout";
 import Contact from "./pages/Contact/Contact";
-import PDFpage from "./pages/PDFpage/PDFpage";
 
 const route = (
   path: string,
@@ -86,7 +85,6 @@ function App() {
         path={"/profile/verification/step2"}
         element={<VerificationStep2 />}
       />
-      <Route path="/file/:name" element={<PDFpage />} />
     </Routes>
   );
 }

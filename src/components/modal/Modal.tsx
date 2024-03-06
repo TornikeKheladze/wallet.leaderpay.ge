@@ -6,9 +6,15 @@ interface ModalProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
+  closeClassname?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, children }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  setIsOpen,
+  children,
+  closeClassname,
+}) => {
   const backdropVariants = {
     visible: { opacity: 1 },
     hidden: { opacity: 0 },
@@ -60,7 +66,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, setIsOpen, children }) => {
           >
             <button
               type="button"
-              className="w-6 h-6 rounded-full absolute top-1 right-1 bg-red-500 group hover:bg-red-800 transition-colors duration-300"
+              className={
+                "w-6 h-6 rounded-full absolute top-1 right-1 bg-red-500 group hover:bg-red-800 transition-colors duration-300 " +
+                closeClassname
+              }
               onClick={() => setIsOpen(false)}
             >
               <CloseIcon className="text-white h-6 w-6" />

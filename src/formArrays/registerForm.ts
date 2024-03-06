@@ -65,7 +65,6 @@ export const registerForm: FormField[] = [
     type: "text",
     validation: {
       validate: (val: string) => {
-        console.log(val);
         const regex = /^[^a-zA-Zа-яА-Я]*[^a-zA-Zа-яА-Я\s][^a-zA-Zа-яА-Я]*$/;
         if (!regex.test(val)) {
           return "useOnlyGeorgianLetters";
