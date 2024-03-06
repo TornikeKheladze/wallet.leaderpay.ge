@@ -55,6 +55,10 @@ export const registerStep2 = (data: any): Promise<any> => {
   return instance.post("/register/2", data);
 };
 
+export const registerStep3 = (data: any): Promise<any> => {
+  return instance.post("/register/3", data);
+};
+
 export const passwordChange = (data: {
   old_password: string;
   new_password: string;

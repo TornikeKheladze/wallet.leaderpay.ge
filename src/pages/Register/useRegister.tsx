@@ -1,19 +1,24 @@
 import { useMutation, useQuery } from "react-query";
 import { useTranslate } from "../../hooks/useTranslate";
 import { authTranslations } from "../../lang/authTranslations";
-import { getRegisterParams, registerStep1 } from "../../services/authorization";
+import {
+  getRegisterParams,
+  registerStep1,
+  registerStep2,
+} from "../../services/authorization";
 import { FormField } from "../../types/general";
 import { RegisterParams } from "../../types/register";
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import CloseIcon from "../../assets/icons/CloseIcon";
 import { registerForm } from "../../formArrays/registerForm";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const useRegister = () => {
   const { t } = useTranslate(authTranslations);
   const navigate = useNavigate();
-  const [pepInfoModal, setPepInfoModal] = useState(false);
+  const [smsModal, setSmsModal] = useState(false);
+  const [smsInput, setSmsInput] = useState("");
 
   const { data } = useQuery({
     queryKey: "getRegisterParams",
@@ -23,8 +28,7 @@ export const useRegister = () => {
   const { mutate: stepOneMutate, isLoading: stepOneLoading } = useMutation({
     mutationFn: registerStep1,
     onSuccess(data) {
-      navigate("/register/identomat");
-      localStorage.setItem("iframe_url", data.data.iframe_url);
+      setSmsModal(true);
       localStorage.setItem("token", data.data.token);
     },
     onError(data: any) {
@@ -42,6 +46,18 @@ export const useRegister = () => {
           id: "errorToast",
         }
       );
+    },
+  });
+
+  const { mutate: stepTwoMutate, isLoading: stepTwoLoading } = useMutation({
+    mutationFn: registerStep2,
+    onSuccess(data) {
+      navigate("/register/identomat");
+      localStorage.setItem("iframe_url", data.data.iframe_url);
+      localStorage.setItem("token", data.data.token);
+    },
+    onError(data: any) {
+      toast.error(data.response.data.message);
     },
   });
 
@@ -100,12 +116,22 @@ export const useRegister = () => {
   };
 
   return {
-    stepOneLoading,
+    loadings: {
+      stepOneLoading,
+      stepTwoLoading,
+    },
+    mutates: {
+      stepOneMutate,
+      stepTwoMutate,
+    },
+    states: {
+      smsModal,
+      smsInput,
+      setSmsModal,
+      setSmsInput,
+    },
     fields,
     params,
-    stepOneMutate,
     t,
-    pepInfoModal,
-    setPepInfoModal,
   };
 };

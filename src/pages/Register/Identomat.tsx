@@ -3,7 +3,7 @@ import Modal from "../../components/modal/Modal";
 import SuccessIcon from "../../assets/icons/SuccessIcon";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-import { registerStep2 } from "../../services/authorization";
+import { registerStep3 } from "../../services/authorization";
 
 const Identomat: React.FC = () => {
   const [successModal, setSuccessModal] = useState(false);
@@ -12,8 +12,8 @@ const Identomat: React.FC = () => {
   const navigate = useNavigate();
   const src = localStorage.getItem("iframe_url") || "";
   const token = localStorage.getItem("token") || "";
-  const { mutate: stepTwoMutate } = useMutation<any, any, any>({
-    mutationFn: registerStep2,
+  const { mutate: stepTreeMutate } = useMutation<any, any, any>({
+    mutationFn: registerStep3,
     onSuccess() {
       setSuccessModal(true);
       setTimeout(() => {
@@ -23,7 +23,6 @@ const Identomat: React.FC = () => {
       }, 2000);
     },
     onError(data) {
-      console.log(data);
       setErrorMessage(data.response.data.message);
       setErrorModal(true);
       setTimeout(() => {
@@ -36,7 +35,7 @@ const Identomat: React.FC = () => {
   addEventListener("message", function (e) {
     if (e.origin !== "https://widget.identomat.com") return;
     if (e.data !== "DONE") return;
-    stepTwoMutate({ token });
+    stepTreeMutate({ token });
   });
 
   return (
