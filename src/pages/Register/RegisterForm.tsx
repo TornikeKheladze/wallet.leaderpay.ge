@@ -127,8 +127,8 @@ const RegisterForm: React.FC<FormProps> = ({
                   {t("agreeTerms")}
                 </label>
                 <a
-                  href={`/src/assets/files/${field.name}.pdf`}
-                  download
+                  href={`/file/${field.name}`}
+                  target="_blank"
                   className="text-blue-500 underline hover:text-blue-800 mr-4"
                 >
                   {t(field.label)}
