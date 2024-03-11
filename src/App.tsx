@@ -50,7 +50,12 @@ function App() {
   return (
     <Routes>
       {route("/", <Login />, "blank")}
-      {route("/register", <Register />, "blank")}
+      {/* {route("/register", <Register />, "blank")} */}
+      {route(
+        "/register",
+        <h1 className="text-center">რეგისტრაცია დროებით გამორთულია</h1>,
+        "blank"
+      )}
       {route("/contact", <Contact />, "blank")}
       <Route path={"register/identomat"} element={<Identomat />} />
       {route("/pages/:page", <Info />, "blank", true)}
@@ -80,7 +85,8 @@ function App() {
       {route("/templates", <Templates />)}
       {route("/profile", <Profile />)}
       {route("/profile/passwordChange", <PasswordChange />)}
-      {route("/profile/verification", <Verification />)}
+      {/* {route("/profile/verification", <Verification />)} */}
+      {route("/profile/verification", <h1>ვერიფიკაცია დროებით გამორთულია</h1>)}
       <Route
         path={"/profile/verification/step2"}
         element={<VerificationStep2 />}
