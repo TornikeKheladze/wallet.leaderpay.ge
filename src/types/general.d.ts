@@ -41,3 +41,20 @@ export type Template = {
   service: FullService;
   info: InfoData;
 };
+
+export type NewsItem = {
+  date: string;
+  id: number;
+  image: string;
+  title: {
+    ka: string;
+    en: string;
+    ru: string;
+  };
+  txt: {
+    ka: string;
+    en: string;
+    ru: string;
+  };
+  views: number;
+};

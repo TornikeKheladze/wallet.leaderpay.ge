@@ -20,14 +20,15 @@ export const useLogin = () => {
 
   const [smsInput, setSmsInput] = useState<number | string>();
 
-  const { isLoading: userInfoLoading } = useQuery({
-    queryKey: "getUserInfo",
+  const { isLoading: userInfoLoading = true, isFetched } = useQuery({
+    queryKey: ["getUserInfo"],
     queryFn: getUserInfo,
     onSuccess: (data) => {
       dispatch(saveUser(data.data));
       navigate("/home");
     },
     retry: false,
+    staleTime: Infinity,
   });
 
   const {
@@ -89,5 +90,6 @@ export const useLogin = () => {
     checkLoading,
     onFormSubmit,
     userInfoLoading,
+    isFetched,
   };
 };

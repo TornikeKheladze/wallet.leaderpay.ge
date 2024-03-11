@@ -29,8 +29,8 @@ export const getContracts = () => {
 export const getCashouts = () => {
   return instance.post("/pages/cashout");
 };
-export const getNewsList = () => {
-  return instance.post("/news/list");
+export const getNewsList = (data: any) => {
+  return instance.post("/news/list", data);
 };
 export const getSingleNew = (id: any) => {
   return instance.post(`news/get/${id}`);

@@ -6,12 +6,15 @@ import { logout } from "../../../services/authorization";
 import { useMutation } from "react-query";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { layoutTranslations } from "../../../lang/common";
+import { useDispatch } from "react-redux";
+import { saveUser } from "../../../store/userSlice";
 
 const useUserDropdown = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const { t } = useTranslate(layoutTranslations);
+  const dispatch = useDispatch();
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -36,6 +39,7 @@ const useUserDropdown = () => {
     onSuccess: () => {
       navigate("/");
       localStorage.removeItem("access_token");
+      dispatch(saveUser({}));
     },
   });
 
