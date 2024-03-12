@@ -25,9 +25,6 @@ const Login = () => {
     isFetched,
   } = useLogin();
 
-  // <div className="mx-7 sm:flex justify-center py-10 2xl:mt-24 mt-9 overflow-hidden z-10">
-  //  <div className="bg-bgCard px-8 py-5 rounded-lg shadow-xl sm:w-400">
-  //   <div className="flex items-center justify-between mb-8">
   return (
     <div className="mx-7 sm:flex justify-center md:py-10 py-5 overflow-hidden z-10 ">
       {!isFetched && userInfoLoading && (
@@ -42,7 +39,13 @@ const Login = () => {
           <LanguageSwitcher className="text-textPrimary hover:bg-gray-800" />
         </div>
         {checkLoginData ? (
-          <div className="flex flex-col gap-3 mt-6">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              signIn();
+            }}
+            className="flex flex-col gap-3 mt-6"
+          >
             {loginLoading && <LoadingSpinner blur />}
             <label className="block text-textPrimary text-sm font-bold mb-2">
               {t("smsCode")}
@@ -56,12 +59,11 @@ const Login = () => {
             />
             <button
               disabled={!isSixDigits(smsInput)}
-              onClick={signIn}
-              className="bg-primaryYellow transition-all duration-200 uppercase font-normal cursor-pointer w-full hover:bg-primaryYellowHover text-textBlack py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
+              className="disabled:cursor-not-allowed bg-primaryYellow transition-all duration-200 uppercase font-normal cursor-pointer w-full hover:bg-primaryYellowHover text-textBlack py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
             >
               {t("signIn")}
             </button>
-          </div>
+          </form>
         ) : (
           <>
             {checkLoading && <LoadingSpinner blur />}

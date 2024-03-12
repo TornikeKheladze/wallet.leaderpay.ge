@@ -39,7 +39,6 @@ const BlankLayout: React.FC<{ children: ReactNode; login?: boolean }> = ({
     staleTime: Infinity,
   });
   const { user } = useSelector((store: RootState) => store.user);
-  // className="absolute left-1/2 transform -translate-x-1/2 z-30 md:w-20 md:top-0 w-16 -top-1 cursor-pointer"
   const isLoggedIn = user.id;
   return (
     <>

@@ -281,6 +281,6 @@ export const useService = () => {
     smsMutate,
     defaultInfoParams,
     templateExicts,
-    authHook: { cardMargin, backBtnClass },
+    authHook: { cardMargin, backBtnClass, notAuthorized },
   };
 };

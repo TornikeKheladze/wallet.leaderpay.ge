@@ -26,7 +26,7 @@ const Service = () => {
     setStates,
     defaultInfoParams,
     templateExicts,
-    authHook: { cardMargin, backBtnClass },
+    authHook: { cardMargin, backBtnClass, notAuthorized },
   } = useService();
 
   return (
@@ -65,11 +65,13 @@ const Service = () => {
             {service.lang[lang]}
           </h3>
           <img src={service.image} alt="" className="md:w-40 w-20" />
-          <TemplateButton
-            infoData={infoData}
-            loading={loadings.templateLoading}
-            templateExicts={templateExicts()}
-          />
+          {!notAuthorized && (
+            <TemplateButton
+              infoData={infoData}
+              loading={loadings.templateLoading}
+              templateExicts={templateExicts()}
+            />
+          )}
         </div>
 
         <div className="w-full flex-1 mt-3">
