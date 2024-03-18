@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { FormField } from "../../types/general";
 import {
   transferInfo,
@@ -15,6 +15,7 @@ import { currencies } from "../../data/currencies";
 
 export const useSendMoney = () => {
   const { t } = useTranslate(transferTranslations, formTranslations);
+  const queryClient = useQueryClient();
   const [fields, setFields] = useState<FormField[]>([
     {
       name: "wallet_number",
@@ -101,6 +102,7 @@ export const useSendMoney = () => {
   } = useMutation<any, any, TransferPay>({
     mutationFn: transferPay,
     onSuccess() {
+      queryClient.invalidateQueries("getUserInfo");
       setConfirmModal(false);
       setSuccessModal(true);
     },

@@ -106,6 +106,7 @@ export const useWithDraw = () => {
     // data: withdrawData,
   } = useMutation<SmsCardResponse, any, Withdraw>({
     mutationFn: withdraw,
+    onSuccess: () => queryClient.invalidateQueries("getUserInfo"),
   });
 
   const {

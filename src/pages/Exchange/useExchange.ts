@@ -47,6 +47,8 @@ export const useExchange = () => {
     },
   });
 
+  // queryClient.invalidateQueries("getUserInfo");
+
   useEffect(() => {
     let timer = 0;
     const performAction = () => {

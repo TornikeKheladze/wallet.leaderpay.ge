@@ -139,6 +139,7 @@ export const useService = () => {
   } = useMutation<any, any>({
     mutationFn: pay,
     onSuccess() {
+      queryClient.invalidateQueries("getUserInfo");
       setIsOpen(false);
       setSuccessModal(true);
     },
