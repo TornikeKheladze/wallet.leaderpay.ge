@@ -31,3 +31,17 @@ export const paySms = () => {
 export const pay = (data: any) => {
   return instance.post("/billing/pay", data);
 };
+
+export const merchantInit = (data: any) => {
+  return instance.post("/merchant/init", data);
+};
+
+export const merchantPay = (
+  status: "failed" | "success",
+  hash: string | null,
+  operation_id: string | null
+) => {
+  return instance.get(
+    `/merchant/${status}?hash=${hash}&operation_id=${operation_id}`
+  );
+};

@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   getServiceById,
   getServiceInfo,
+  merchantInit,
   pay,
   paySms,
 } from "../../../services/services";
@@ -144,6 +145,17 @@ export const useService = () => {
       setSuccessModal(true);
     },
   });
+  const {
+    // data: merchantInitData,
+    mutate: merchantInitMutate,
+    // isLoading: merchantInitLoading,
+    // error: merchantInitError,
+  } = useMutation({
+    mutationFn: merchantInit,
+    onSuccess(data) {
+      window.location.href = data.data.url;
+    },
+  });
 
   const infoErrorMessage: string =
     infoErrorData?.response.data.errorCode === 2006
@@ -234,6 +246,7 @@ export const useService = () => {
       if (e.type === "merchant") {
         if (withMerchant.find((field) => field.name === "mFirstName")) {
           // setReqPayload(payload);
+          merchantInitMutate(payload);
           // setIsOpen(true);
         } else {
           setWithMerchant([...fields(), ...merchantFields]);
