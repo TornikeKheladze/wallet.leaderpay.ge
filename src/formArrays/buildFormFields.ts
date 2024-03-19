@@ -141,7 +141,13 @@ export const merchantFields: FormField[] = [
     placeholder: "01000101231",
     type: "text",
     validation: {
-      required: "requiredField",
+      validate: (val: string) => {
+        if (!val) return "requiredField";
+        const regex = /^\d{11}$/;
+        if (!regex.test(val)) {
+          return "wrong format , example : 01000101231";
+        }
+      },
     },
   },
   {
@@ -150,7 +156,13 @@ export const merchantFields: FormField[] = [
     placeholder: "1999-09-19",
     type: "text",
     validation: {
-      required: "requiredField",
+      validate: (val: string) => {
+        if (!val) return "requiredField";
+        const regex = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+        if (!regex.test(val)) {
+          return "wrong format , example : 1998-01-25";
+        }
+      },
     },
   },
 ];

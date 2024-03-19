@@ -15,6 +15,7 @@ type ServiceFormProps = {
   merchantButton: ReactNode;
   setWithMerchant: Dispatch<SetStateAction<FormField[]>>;
   defaultValues?: { [key: string]: string };
+  merchantLoading: boolean;
 };
 
 const ServiceForm: React.FC<ServiceFormProps> = ({
@@ -25,6 +26,7 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
   merchantButton,
   setWithMerchant,
   defaultValues,
+  merchantLoading,
 }) => {
   const {
     register,
@@ -141,7 +143,7 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
             className="flex items-center justify-between md:justify-center md:gap-3 bg-primaryYellow hover:bg-primaryYellowHover uppercase font-normal cursor-pointer w-full transition-colors duration-300 text-textBlack py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
           >
             <BankCardIcon />
-            {t("payWithCard")}
+            {merchantLoading ? <LoadingSpinner /> : t("payWithCard")}
           </button>
         ) : (
           <></>

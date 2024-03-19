@@ -99,6 +99,7 @@ const Service = () => {
                 loadings.payLoading
               }
               merchantButton={infoData ? true : false}
+              merchantLoading={loadings.merchantInitLoading}
             />
           )}
           <p

@@ -148,7 +148,7 @@ export const useService = () => {
   const {
     // data: merchantInitData,
     mutate: merchantInitMutate,
-    // isLoading: merchantInitLoading,
+    isLoading: merchantInitLoading,
     // error: merchantInitError,
   } = useMutation({
     mutationFn: merchantInit,
@@ -278,6 +278,7 @@ export const useService = () => {
       payLoading,
       pageLoading,
       templateLoading,
+      merchantInitLoading,
     },
     errorMessages: { infoErrorMessage, payErrorMessage, smsErrorMessage },
     t,
