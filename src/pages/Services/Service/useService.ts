@@ -249,7 +249,13 @@ export const useService = () => {
           merchantInitMutate(payload);
           // setIsOpen(true);
         } else {
-          setWithMerchant([...fields(), ...merchantFields]);
+          // აქ თუ ავტორიზებული არ არის მაგ შემთხვევაში ემატება მერჩანტის ფილდები
+          // თუ ავტორიზებულია არ ჭირდება მერჩანტის ფილდები და პირდაპირ ინიტზე ვუშვებ
+          if (notAuthorized) {
+            setWithMerchant([...fields(), ...merchantFields]);
+          } else {
+            merchantInitMutate(payload);
+          }
         }
         return;
       }
