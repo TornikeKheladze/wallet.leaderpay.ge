@@ -26,3 +26,7 @@ export const addCard: () => Promise<any> = () => {
 export const getOperationList: (data: any) => Promise<any> = (data) => {
   return instance.post("/withdraw/card_operation_list", data);
 };
+
+export const qrInit: () => Promise<any> = () => {
+  return instance.post("qr/init");
+};
