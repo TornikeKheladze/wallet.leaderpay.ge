@@ -149,8 +149,8 @@ export const useService = () => {
     // data: merchantInitData,
     mutate: merchantInitMutate,
     isLoading: merchantInitLoading,
-    // error: merchantInitError,
-  } = useMutation({
+    error: merchantInitError,
+  } = useMutation<any, any>({
     mutationFn: merchantInit,
     onSuccess(data) {
       window.location.href = data.data.url;
@@ -163,6 +163,8 @@ export const useService = () => {
       : infoErrorData?.response.data.errorMessage;
   const smsErrorMessage: string = smsErrorData?.response.data.errorMessage;
   const payErrorMessage: string = payErrorData?.response.data.errorMessage;
+  const merchantErrorMessage: string =
+    merchantInitError?.response.data.errorMessage;
 
   const fields = () => {
     const defaultFields = infoFields(service);
@@ -286,7 +288,12 @@ export const useService = () => {
       templateLoading,
       merchantInitLoading,
     },
-    errorMessages: { infoErrorMessage, payErrorMessage, smsErrorMessage },
+    errorMessages: {
+      infoErrorMessage,
+      payErrorMessage,
+      smsErrorMessage,
+      merchantErrorMessage,
+    },
     t,
     infoData,
     states: {

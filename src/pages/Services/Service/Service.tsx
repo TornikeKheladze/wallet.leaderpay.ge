@@ -104,10 +104,17 @@ const Service = () => {
           )}
           <p
             className={`${
-              errorMessages.infoErrorMessage ? "opacity-100" : "opacity-0"
+              errorMessages.infoErrorMessage ||
+              errorMessages.merchantErrorMessage
+                ? "opacity-100"
+                : "opacity-0"
             } mt-6 p-2 bg-error max-w-md mx-auto flex-1 text-center transition-opacity duration-200 text-white rounded-lg flex justify-center items-center`}
           >
-            {t(errorMessages.infoErrorMessage || "somethingWentWrong")}
+            {t(
+              errorMessages.infoErrorMessage ||
+                errorMessages.merchantErrorMessage ||
+                "somethingWentWrong"
+            )}
           </p>
         </div>
       </div>
