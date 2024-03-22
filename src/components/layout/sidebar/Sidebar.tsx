@@ -12,7 +12,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="pl-8 pr-8 md:pt-24 md:pb-8 bg-bgCard overflow-hidden fixed h-14 md:h-screen left-0 md:top-0 bottom-0 z-30 w-screen md:w-24 flex items-center md:flex-col flex-row">
+      <div className="pl-4 pr-4 md:pt-24 md:pb-8 bg-bgCard overflow-hidden fixed h-14 md:h-screen left-0 md:top-0 bottom-0 z-30 w-screen md:w-24 flex items-center md:flex-col flex-row">
         <ul className="flex md:flex-col flex-row items-center md:justify-start md:gap-16 md:mt-8 justify-around h-full w-full">
           <li className="p-1 hover:bg-primaryYellowHover transition-colors duration-300 rounded-lg group">
             <Tooltip
