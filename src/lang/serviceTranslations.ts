@@ -59,4 +59,9 @@ export const serviceTranslations = {
     ru: "Шаблон добавлен",
     ka: "შაბლონი დამატებულია",
   },
+  backToWallet: {
+    en: "Back to Wallet",
+    ru: "Вернуться в кошелек",
+    ka: "საფულეზე დაბრუნება",
+  },
 };

@@ -4,9 +4,10 @@ import ErrIcon from "../../assets/icons/ErrIcon";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { merchantPay } from "../../services/services";
+import { serviceTranslations } from "../../lang/serviceTranslations";
 
 const Failed = () => {
-  const { t } = useTranslate();
+  const { t } = useTranslate(serviceTranslations);
   const [searchParams] = useSearchParams();
   const hash = searchParams.get("hash");
   const operation_id = searchParams.get("operation_id");

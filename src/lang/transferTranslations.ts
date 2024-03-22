@@ -84,4 +84,9 @@ export const transferTranslations = {
     ru: "Вывод наличных",
     ka: "განაღდება",
   },
+  addBalanceWithCard: {
+    en: "Add Balance with Card",
+    ru: "Пополнить баланс картой",
+    ka: "ბალანსის შევსება ბარათიდან",
+  },
 };

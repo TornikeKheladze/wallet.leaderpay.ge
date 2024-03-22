@@ -45,3 +45,24 @@ export const merchantPay = (
     `/merchant/${status}?hash=${hash}&operation_id=${operation_id}`
   );
 };
+
+export const addBalanceWithCard = (amount: string): Promise<any> => {
+  return instance.post("/merchant/initWallet", { amount });
+};
+
+export const addCardSuccess = (
+  o_operation_id: string | null,
+  o_order_id: string | null,
+  p_maskedPan: string | null,
+  p_paymentSystem: string | null,
+  p_expiry: string | null,
+  card_id: string | null
+) => {
+  return instance.get(
+    `/withdraw/success?o_operation_id=${o_operation_id}&o_order_id=${o_order_id}&p_maskedPan=${p_maskedPan}&p_paymentSystem=${p_paymentSystem}&p_expiry=${p_expiry}&card_id=${card_id}`
+  );
+};
+
+export const addCardFailed = () => {
+  return instance.get("/withdraw/failed");
+};

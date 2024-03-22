@@ -28,6 +28,9 @@ import AddBalance from "./pages/AddBalance/AddBalance";
 import QRCashout from "./pages/QRCashout/QRCashout";
 import Contact from "./pages/Contact/Contact";
 import Success from "./pages/Success/Success";
+import Failed from "./pages/Failed/Failed";
+import AddCardSuccessPage from "./pages/Success/AddCardSuccessPage";
+import AddCardFailedPage from "./pages/Failed/AddCardFailedPage";
 
 const route = (
   path: string,
@@ -93,6 +96,9 @@ function App() {
         element={<VerificationStep2 />}
       />
       {route("/payment/success", <Success />, "blank")}
+      {route("/payment/failed", <Failed />, "blank")}
+      {route("/payment/addCard/success", <AddCardSuccessPage />, "blank")}
+      {route("/payment/addCard/failed", <AddCardFailedPage />, "blank")}
     </Routes>
   );
 }
