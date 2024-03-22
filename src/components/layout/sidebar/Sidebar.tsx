@@ -95,8 +95,8 @@ const Sidebar = () => {
               <Link
                 className={`group-hover:fill-textBlack group-hover:text-textBlack flex flex-col items-center text-[12px] ${
                   pathname === "/transfer/qrCashout"
-                    ? "fill-white "
-                    : "fill-customGray "
+                    ? "fill-white text-white"
+                    : "fill-customGray text-customGray"
                 }`}
                 to={"/transfer/qrCashout"}
               >
