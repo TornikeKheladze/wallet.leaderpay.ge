@@ -4,9 +4,8 @@ import BulbIcon from "../../../assets/icons/BulbIcon";
 import { Tooltip } from "@material-tailwind/react";
 import LogoutIcon from "../../../assets/icons/LogoutIcon";
 import BankCardIcon from "../../../assets/icons/BankCardIcon";
-import SettingsIcon from "../../../assets/icons/SettingsIcon";
-
 import useSidebar from "./useSidebar";
+import QRIcon from "../../../assets/icons/QRIcon";
 
 const Sidebar = () => {
   const { t, pathname, logoutMutate } = useSidebar();
@@ -71,6 +70,7 @@ const Sidebar = () => {
             >
               <Link
                 className={`group-hover:text-textBlack flex flex-col items-center text-[12px] ${
+                  pathname !== "/transfer/qrCashout" &&
                   pathname.includes("/transfer")
                     ? "text-white"
                     : "text-customGray"
@@ -85,7 +85,7 @@ const Sidebar = () => {
           <li className="p-1 hover:bg-primaryYellowHover transition-colors duration-300 rounded-lg group">
             <Tooltip
               className="md:block hidden bg-white text-gray-700"
-              content={t("settings")}
+              content={"QR " + t("cashout")}
               animate={{
                 mount: { scale: 1, y: 0 },
                 unmount: { scale: 0, y: 25 },
@@ -93,13 +93,15 @@ const Sidebar = () => {
               placement="right"
             >
               <Link
-                className={`group-hover:text-textBlack flex flex-col items-center text-[12px] ${
-                  pathname === "/settings" ? "text-white" : "text-customGray"
+                className={`group-hover:fill-textBlack group-hover:text-textBlack flex flex-col items-center text-[12px] ${
+                  pathname === "/transfer/qrCashout"
+                    ? "fill-white "
+                    : "fill-customGray "
                 }`}
-                to={"/settings"}
+                to={"/transfer/qrCashout"}
               >
-                <SettingsIcon />
-                <span className="md:hidden">{t("settings")}</span>
+                <QRIcon />
+                <span className="md:hidden">QR {t("cashout")}</span>
               </Link>
             </Tooltip>
           </li>

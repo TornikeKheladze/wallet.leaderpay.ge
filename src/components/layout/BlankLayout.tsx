@@ -49,7 +49,7 @@ const BlankLayout: React.FC<{ children: ReactNode; login?: boolean }> = ({
           pathname === "/passwordReset" ? (
             <></>
           ) : (
-            <LanguageSwitcher />
+            <LanguageSwitcher className="text-textPrimary hover:bg-gray-800" />
           )}
           {isLoggedIn ? (
             <UserDropdown />

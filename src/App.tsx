@@ -4,7 +4,6 @@ import Layout from "./components/layout/Layout";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import BlankLayout from "./components/layout/BlankLayout";
-import Settings from "./pages/Settings/Settings";
 import Transfer from "./pages/Transfer/Transfer";
 import WithDraw from "./pages/Withdraw/Withdraw";
 import Templates from "./pages/Templates/Templates";
@@ -78,7 +77,6 @@ function App() {
         true
       )}
       {route("/guest/services/:id", <Service />, "blank", true)}
-      {route("/settings", <Settings />)}
       {route("/transfer", <Transfer />)}
       {route("/transfer/withdraw", <WithDraw />)}
       {route("/transfer/sendMoney", <SendMoney />)}

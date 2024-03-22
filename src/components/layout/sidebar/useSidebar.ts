@@ -6,9 +6,10 @@ import { useMutation } from "react-query";
 import { logout } from "../../../services/authorization";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../../../store/userSlice";
+import { transferTranslations } from "../../../lang/transferTranslations";
 
 const useSidebar = () => {
-  const { t } = useTranslate(layoutTranslations);
+  const { t } = useTranslate(layoutTranslations, transferTranslations);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
