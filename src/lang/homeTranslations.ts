@@ -2,7 +2,7 @@ export const homeTranslations = {
   balance: {
     en: "BALANCE",
     ru: "БАЛАНС",
-    ka: "ბალანსი",
+    ka: "ბალანსიი",
   },
   walletPersNumber: {
     en: "Wallet Number",
