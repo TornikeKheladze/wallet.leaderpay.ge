@@ -8,3 +8,7 @@ export const getCurrencies = async () => {
 export const rateCurrency = async (data: ratePayload) => {
   return instance.post("/exchange/rate", data);
 };
+
+export const convertCurrency = async (data: ratePayload) => {
+  return instance.post("exchange/convert", data);
+};

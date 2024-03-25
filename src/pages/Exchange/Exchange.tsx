@@ -16,6 +16,8 @@ const Exchange = () => {
     rateData,
     rateLoading,
     t,
+    convertLoading,
+    convertMutate,
   } = useExchange();
   return (
     <div>
@@ -67,7 +69,19 @@ const Exchange = () => {
             </div>
           </div>
         </div>
-        <button className="button_primary w-32 ml-auto">{t("exchange")}</button>
+        <button
+          disabled={rateLoading || convertLoading}
+          onClick={() =>
+            convertMutate({
+              amount: fromAmount,
+              from: fromCurrency.id,
+              to: toCurrency.id,
+            })
+          }
+          className="button_primary w-32 ml-auto"
+        >
+          {convertLoading ? <LoadingSpinner /> : t("exchange")}
+        </button>
       </div>
     </div>
   );

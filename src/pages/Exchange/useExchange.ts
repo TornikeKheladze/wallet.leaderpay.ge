@@ -1,7 +1,11 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useTranslate } from "../../hooks/useTranslate";
 import { exchangeTranslations } from "../../lang/exchangeTranslations";
-import { getCurrencies, rateCurrency } from "../../services/exchange";
+import {
+  convertCurrency,
+  getCurrencies,
+  rateCurrency,
+} from "../../services/exchange";
 import { useEffect, useState } from "react";
 import { Currency } from "../../types/exchange";
 import { getNextElement } from "../../helpers/getNextElement";
@@ -9,6 +13,7 @@ import toast from "react-hot-toast";
 
 export const useExchange = () => {
   const { t } = useTranslate(exchangeTranslations);
+  const queryClient = useQueryClient();
 
   const [fromCurrency, setFromCurrency] = useState<Currency>({
     id: 0,
@@ -47,7 +52,16 @@ export const useExchange = () => {
     },
   });
 
-  // queryClient.invalidateQueries("getUserInfo");
+  const { mutate: convertMutate, isLoading: convertLoading } = useMutation({
+    mutationFn: convertCurrency,
+    onError: (data: any) => {
+      toast.error(data.response.data.errorMessage);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("getUserInfo");
+      toast.success(t("Convert Completed"));
+    },
+  });
 
   useEffect(() => {
     let timer = 0;
@@ -106,6 +120,8 @@ export const useExchange = () => {
     toCurrency,
     rateData,
     rateLoading,
+    convertMutate,
+    convertLoading,
     t,
   };
 };
