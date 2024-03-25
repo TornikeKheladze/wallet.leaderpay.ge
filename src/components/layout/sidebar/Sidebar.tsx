@@ -31,7 +31,7 @@ const Sidebar = () => {
                 to={"/home"}
               >
                 <HomeIcon />
-                <span className="md:hidden">{t("main")}</span>
+                <span className="md:hidden text-[10px]">{t("main")}</span>
               </Link>
             </Tooltip>
           </li>
@@ -54,7 +54,7 @@ const Sidebar = () => {
                 to={"/services"}
               >
                 <BulbIcon />
-                <span className="md:hidden">{t("services")}</span>
+                <span className="md:hidden text-[10px]">{t("services")}</span>
               </Link>
             </Tooltip>
           </li>
@@ -78,7 +78,9 @@ const Sidebar = () => {
                 to={"/transfer"}
               >
                 <BankCardIcon />
-                <span className="text-center md:hidden">{t("transfer")}</span>
+                <span className="text-center md:hidden text-[10px]">
+                  {t("transfer")}
+                </span>
               </Link>
             </Tooltip>
           </li>
@@ -101,7 +103,7 @@ const Sidebar = () => {
                 to={"/transfer/qrCashout"}
               >
                 <QRIcon />
-                <span className="md:hidden">QR {t("cashout")}</span>
+                <span className="md:hidden text-[10px]">QR {t("cashout")}</span>
               </Link>
             </Tooltip>
           </li>
