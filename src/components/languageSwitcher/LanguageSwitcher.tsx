@@ -25,7 +25,7 @@ const LanguageSwitcher: React.FC<{ className?: string }> = ({ className }) => {
         `}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {languages.find((item) => item.code === lang)?.label}
+        {/* {languages.find((item) => item.code === lang)?.label} */}
         {languages.find((item) => item.code === lang)?.icon}
       </button>
       {isOpen && (
@@ -36,7 +36,7 @@ const LanguageSwitcher: React.FC<{ className?: string }> = ({ className }) => {
               onClick={() => handleLanguageChange(language.code)}
               className="px-4 py-2 cursor-pointer hover:bg-primaryYellowHover flex justify-between items-center gap-1 text-sm"
             >
-              <span className="text-textBlack">{language.label}</span>
+              {/* <span className="text-textBlack">{language.label}</span> */}
               {language.icon}
             </div>
           ))}
