@@ -2,10 +2,10 @@ import { TableObj } from "../types/general";
 
 export const operationArr: TableObj[] = [
   {
-    name: "status_id",
+    name: "type_id",
     filter: "select",
     options: {
-      searchKey: "status_id",
+      searchKey: "type_id",
       values: [
         {
           id: "1",
@@ -19,10 +19,10 @@ export const operationArr: TableObj[] = [
     },
   },
   {
-    name: "type_id",
+    name: "status_id",
     filter: "select",
     options: {
-      searchKey: "type_id",
+      searchKey: "status_id",
       values: [
         {
           id: "1",
