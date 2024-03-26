@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 const AddBalance = () => {
   const { t } = useTranslate(transferTranslations, tableTranslations);
   const [amount, setAmount] = useState("");
-  const { isLoading, mutate } = useMutation({
+  const { isLoading, mutate, isSuccess } = useMutation({
     mutationFn: () => addBalanceWithCard(amount),
     onSuccess: (data) => {
       window.location.href = data.data.url;
@@ -62,7 +62,7 @@ const AddBalance = () => {
           className="disabled:cursor-not-allowed border mb-3 w-full flex justify-between gap-2 items-center rounded-md p-2 border-buttonGray bg-bg4 md:hover:bg-bg1 transition-colors duration-300"
         >
           {t("confirm")}
-          {isLoading ? <LoadingSpinner /> : <BankCardIcon />}
+          {isLoading || isSuccess ? <LoadingSpinner /> : <BankCardIcon />}
         </button>
       </div>
     </>

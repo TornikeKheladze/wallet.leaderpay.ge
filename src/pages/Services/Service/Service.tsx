@@ -99,7 +99,9 @@ const Service = () => {
                 loadings.payLoading
               }
               merchantButton={infoData ? true : false}
-              merchantLoading={loadings.merchantInitLoading}
+              merchantLoading={
+                loadings.merchantInitLoading || loadings.merchantIsSuccess
+              }
             />
           )}
           <p
