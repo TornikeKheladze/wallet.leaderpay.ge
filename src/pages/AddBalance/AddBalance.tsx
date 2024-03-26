@@ -16,8 +16,8 @@ const AddBalance = () => {
     onSuccess: (data) => {
       window.location.href = data.data.url;
     },
-    onError: () => {
-      toast.error("somethingWentWrong");
+    onError: (data: { response: { data: { errorMessage: string } } }) => {
+      toast.error(data.response.data.errorMessage);
     },
   });
 
