@@ -42,16 +42,16 @@ const WithDraw = () => {
       withdrawLoading,
       addCardLoading,
       operationListLoading,
+      deleteLoading,
     },
     functions: {
       submitPayment,
       withdrawHandler,
-      deleteHandler,
       calculateCommision,
       filterHandler,
       showMore,
     },
-    mutations: { smsMutate, addCardMutate },
+    mutations: { smsMutate, addCardMutate, deleteMutate },
     operationList,
   } = useWithDraw();
 
@@ -93,11 +93,15 @@ const WithDraw = () => {
           <h4 className="font-bold ">{t("areYouSureToDeleteCard")}!</h4>
           <div className="flex gap-3">
             <button
-              onClick={deleteHandler}
+              onClick={() => deleteMutate(requestData.card_id)}
               className="text-white flex items-center p-1 hover:bg-red-800 transition-colors duration-300 bg-red-500 rounded-md"
             >
               <span>{t("confirm")}</span>
-              <DeleteIcon className="w-4" />
+              {deleteLoading ? (
+                <LoadingSpinner />
+              ) : (
+                <DeleteIcon className="w-4" />
+              )}
             </button>
             <button
               onClick={() => setDeleteModal(false)}

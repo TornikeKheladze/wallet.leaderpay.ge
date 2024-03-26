@@ -109,14 +109,16 @@ export const useWithDraw = () => {
     onSuccess: () => queryClient.invalidateQueries("getUserInfo"),
   });
 
-  const {
-    // mutate: deleteMutate,
-    // isLoading: deleteLoading,
-    error: deleteError,
-  } = useMutation<string, any, any>({
+  const { mutate: deleteMutate, isLoading: deleteLoading } = useMutation<
+    string,
+    any,
+    any
+  >({
     mutationFn: deleteCard,
     onSuccess() {
+      toast.success(t("cardDeleted"));
       queryClient.invalidateQueries("getWithdrawList");
+      setDeleteModal(false);
     },
   });
 
@@ -188,13 +190,6 @@ export const useWithDraw = () => {
     }
   };
 
-  const deleteHandler = () => {
-    // deleteMutate(requestData.card_id);
-    console.log(deleteError);
-    console.log(requestData.card_id);
-    setDeleteModal(false);
-  };
-
   return {
     setStates: {
       setErrorModal,
@@ -220,16 +215,16 @@ export const useWithDraw = () => {
       smsLoading,
       addCardLoading,
       operationListLoading,
+      deleteLoading,
     },
     functions: {
       submitPayment,
       withdrawHandler,
-      deleteHandler,
       calculateCommision,
       filterHandler,
       showMore,
     },
-    mutations: { smsMutate, addCardMutate },
+    mutations: { smsMutate, addCardMutate, deleteMutate },
     t,
     smsData,
     withdrawError,
