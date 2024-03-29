@@ -69,9 +69,4 @@ export const profileTranslations = {
     ru: "Аватар изменен",
     ka: "ავატარი შეიცვალა",
   },
-  depositWithdrawLimit: {
-    ka: "შეტანა-გატანის ლიმიტი მინ 1ლ მაქს 3000ლ",
-    en: "Deposit-withdrawal limit min 1 Lari max 3000 Lari",
-    ru: "Лимит на ввод-вывод мин 1 лари макс 3000 лари",
-  },
 };

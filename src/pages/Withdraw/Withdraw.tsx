@@ -11,6 +11,8 @@ import { operationArr } from "../../tableArrays/operationArr";
 import ErrorModal from "./components/ErrorModal";
 import InfoModal from "./components/InfoModal";
 import { TableObj } from "../../types/general";
+import { Tooltip } from "@material-tailwind/react";
+import ErrIcon from "../../assets/icons/ErrIcon";
 
 const WithDraw = () => {
   const {
@@ -129,7 +131,16 @@ const WithDraw = () => {
       />
       <div className="card p-5 lg:mt-8 my-4 relative">
         {listLoading ? <LoadingSpinner blur /> : <></>}
-        <h1 className="">{t("withdrawMoneyToTheCard")}</h1>
+        <div className="flex justify-between items-center mb-1">
+          <h1 className="md:text-xl text-base mb-4">
+            {t("withdrawMoneyToTheCard")}
+          </h1>
+          <Tooltip content={t("depositWithdrawLimit")}>
+            <button>
+              <ErrIcon />
+            </button>
+          </Tooltip>
+        </div>
         <div>
           <button
             onClick={() => setInfoModal(true)}

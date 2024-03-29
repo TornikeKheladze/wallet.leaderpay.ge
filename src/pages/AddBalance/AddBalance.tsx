@@ -7,6 +7,8 @@ import { addBalanceWithCard } from "../../services/services";
 import { ChangeEvent, useState } from "react";
 import { tableTranslations } from "../../lang/tableTranslations";
 import toast from "react-hot-toast";
+import { Tooltip } from "@material-tailwind/react";
+import ErrIcon from "../../assets/icons/ErrIcon";
 
 const AddBalance = () => {
   const { t } = useTranslate(transferTranslations, tableTranslations);
@@ -24,7 +26,14 @@ const AddBalance = () => {
   return (
     <>
       <div className="card p-5 my-4 lg:mt-8">
-        <h1 className="md:text-2xl text-xl mb-4">{t("addBalance")}</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="md:text-2xl text-xl mb-4">{t("addBalance")}</h1>
+          <Tooltip content={t("depositWithdrawLimit")}>
+            <button>
+              <ErrIcon />
+            </button>
+          </Tooltip>
+        </div>
         <a
           className="mb-3 border flex justify-between gap-2 items-center md:flex-row flex-col rounded-md p-2 border-buttonGray bg-bg4 md:hover:bg-bg1 transition-colors duration-300"
           target="_blank"
@@ -34,7 +43,7 @@ const AddBalance = () => {
             <h3 className="font-bold text-lg text-primaryYellow">
               {t("leaderbet")}{" "}
               <span className="bg-primaryYellow text-textBlack rounded-md p-1">
-                0%
+                6%
               </span>
             </h3>
             <p>{t("toTransferMoneyPressButton")}</p>

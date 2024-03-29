@@ -89,4 +89,9 @@ export const transferTranslations = {
     ru: "Пополнить баланс картой",
     ka: "ბალანსის შევსება ბარათიდან",
   },
+  depositWithdrawLimit: {
+    ka: "ბალანსის შევსების ლიმიტი მინ 5 მაქს 1000, თანხის გატანის ლიმიტი მინ 10 მაქს 1500",
+    en: "Deposit limit limit min 5 Lari max 1000 Lari, withdrawal limit 10 Lari max 1500 Lari",
+    ru: "Лимит депозита мин 5 лари макс 1000 лари, лимит вывода 10 лари макс 1500 лари",
+  },
 };

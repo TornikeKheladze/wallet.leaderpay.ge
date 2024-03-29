@@ -16,7 +16,6 @@ import Modal from "../../components/modal/Modal";
 import EditIcon from "../../assets/icons/EditIcon";
 import toast from "react-hot-toast";
 import ErrIcon from "../../assets/icons/ErrIcon";
-import { Tooltip } from "@material-tailwind/react";
 
 const Profile = () => {
   const { user } = useSelector((store: RootState) => store.user);
@@ -130,11 +129,6 @@ const Profile = () => {
               <EditIcon className="w-4" />
             </label>
           </div>
-          <Tooltip content={t("depositWithdrawLimit")}>
-            <button>
-              <ErrIcon />
-            </button>
-          </Tooltip>
         </div>
         <div className="grid grid-cols-2 gap-4">
           {Object.entries(userInfo).map(([key, value]) => (
