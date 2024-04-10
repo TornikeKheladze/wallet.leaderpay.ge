@@ -55,8 +55,6 @@ const Profile = () => {
     queryFn: () => getLimits().then((res) => res.data),
   });
 
-  console.log(limits);
-
   const links = data?.data.data.links;
 
   const userInfo = {
