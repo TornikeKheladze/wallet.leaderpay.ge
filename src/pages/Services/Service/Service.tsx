@@ -8,6 +8,7 @@ import WalletIcon from "../../../assets/icons/WalletIcon";
 import TemplateButton from "./TemplateButton";
 import ConfirmPaymentModal from "./ConfirmPaymentModal";
 import SuccessModal from "./SuccessModal";
+const FINANCECATEGORYID = "31";
 
 const Service = () => {
   const {
@@ -98,7 +99,11 @@ const Service = () => {
                 loadings.smsLoading ||
                 loadings.payLoading
               }
-              merchantButton={infoData ? true : false}
+              merchantButton={
+                infoData && service.category_id !== FINANCECATEGORYID
+                  ? true
+                  : false
+              }
               merchantLoading={
                 loadings.merchantInitLoading || loadings.merchantIsSuccess
               }
