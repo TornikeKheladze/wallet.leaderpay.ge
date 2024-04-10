@@ -7,7 +7,11 @@ import { Link } from "react-router-dom";
 import ResetPasIcon from "../../assets/icons/ResetPasIcon";
 import CheckedIcon from "../../assets/icons/CheckedIcon";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { avatarChange, getRegisterParams } from "../../services/authorization";
+import {
+  avatarChange,
+  getLimits,
+  getRegisterParams,
+} from "../../services/authorization";
 import { authTranslations } from "../../lang/authTranslations";
 import DocumentIcon from "../../assets/icons/DocumentIcon";
 import PersonIcon from "../../assets/icons/PersonIcon";
@@ -45,6 +49,13 @@ const Profile = () => {
       toast.error(t("somethingWentWrong"));
     },
   });
+
+  const { data: limits } = useQuery({
+    queryKey: "getLimits",
+    queryFn: () => getLimits().then((res) => res.data),
+  });
+
+  console.log(limits);
 
   const links = data?.data.data.links;
 
@@ -163,6 +174,20 @@ const Profile = () => {
             )}
           </Link>
         </div>
+      </div>
+      <div className="card p-5 my-4">
+        <h2 className="mb-3 text-2xl">{t("limit")}</h2>
+        <ul className="flex gap-3 justify-between flex-col">
+          <li>
+            {t("dayLimit")}: {limits?.day} ₾
+          </li>
+          <li>
+            {t("monthLimit")}: {limits?.month} ₾
+          </li>
+          <li>
+            {t("oneTimeLimit")}: {limits?.one} ₾
+          </li>
+        </ul>
       </div>
       <div className="card p-5 my-4">
         <h2 className="mb-3 text-2xl">{t("agreements")}</h2>

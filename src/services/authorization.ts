@@ -4,6 +4,7 @@ import {
   LoginDataResponse,
   LoginPayload,
 } from "../types/login";
+import { GetLimitResponse } from "../types/profile";
 import { fileInstance, instance } from "./axios";
 
 export const getUserInfo = async (data: any) => {
@@ -77,4 +78,8 @@ export const verificationStep1 = (): Promise<any> => {
 
 export const verificationStep2 = (data: any): Promise<any> => {
   return instance.post("/verification/2", data);
+};
+
+export const getLimits = (): Promise<GetLimitResponse> => {
+  return instance.post("/wallet/limits");
 };

@@ -69,4 +69,24 @@ export const profileTranslations = {
     ru: "Аватар изменен",
     ka: "ავატარი შეიცვალა",
   },
+  dayLimit: {
+    en: "Day Limit",
+    ru: "Лимит на день",
+    ka: "დღიური ლიმიტი",
+  },
+  monthLimit: {
+    en: "Month Limit",
+    ru: "Лимит на месяц",
+    ka: "თვიური ლიმიტი",
+  },
+  oneTimeLimit: {
+    en: "One Time Limit",
+    ru: "Одноразовый лимит",
+    ka: "ერთჯერადი ლიმიტი",
+  },
+  limit: {
+    en: "Limit",
+    ru: "Лимит",
+    ka: "ლიმიტი",
+  },
 };
