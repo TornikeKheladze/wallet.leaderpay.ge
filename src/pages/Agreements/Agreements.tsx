@@ -42,11 +42,12 @@ const customTheme: CustomFlowbiteTheme = {
 function Agreements() {
   const { t } = useTranslate(layoutTranslations);
   const { data = [] } = useQuery({
+    queryKey: "getAgreements",
     queryFn: () => getAgreements().then((res) => res.data),
   });
 
   return (
-    <div className="card p-5 md:mt-10 mt-20">
+    <div className="card p-5 md:mt-10 mt-20 md:!w-[60%]">
       <h2 className="text-primaryYellow mb-4">{t("termsAndConditions")}</h2>
       <Flowbite theme={{ theme: customTheme }}>
         <Accordion collapseAll={true}>
@@ -66,14 +67,16 @@ function Agreements() {
                     <thead className="text-left text-primaryYellow">
                       <tr className="border-b border-lightGray pb-3">
                         <th className="w-1/4 pb-2">{t("date")}</th>
+                        <th className="pb-2">{t("status")}</th>
                         <th className="pb-2">{t("documentName")}</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
-                      {agreements.map(({ name, date, file }) => (
+                      {agreements.map(({ name, date, file, status }) => (
                         <tr key={name + date + file}>
                           <td>{date}</td>
+                          <td>{status}</td>
                           <td>{name}</td>
                           <td>
                             <a
