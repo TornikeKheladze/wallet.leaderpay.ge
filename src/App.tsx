@@ -30,6 +30,7 @@ import Success from "./pages/Success/Success";
 import Failed from "./pages/Failed/Failed";
 import AddCardSuccessPage from "./pages/Success/AddCardSuccessPage";
 import AddCardFailedPage from "./pages/Failed/AddCardFailedPage";
+import Agreements from "./pages/Agreements/Agreements";
 
 const route = (
   path: string,
@@ -95,6 +96,7 @@ function App() {
       />
       {route("/payment/success", <Success />, "blank")}
       {route("/payment/failed", <Failed />, "blank")}
+      {route("/pages/agreements", <Agreements />, "blank")}
       {route("/payment/addCard/success", <AddCardSuccessPage />, "blank")}
       {route("/payment/addCard/failed", <AddCardFailedPage />, "blank")}
     </Routes>

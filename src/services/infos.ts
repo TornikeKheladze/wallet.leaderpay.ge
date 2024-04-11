@@ -1,3 +1,4 @@
+import { GetAgreementRes } from "../types/pages";
 import { instance } from "./axios";
 
 export const getAboutUs = () => {
@@ -38,4 +39,8 @@ export const getSingleNew = (id: any) => {
 
 export const sendMessage = async (data: any) => {
   return instance.post("/landing/contact", data);
+};
+
+export const getAgreements = async (): Promise<GetAgreementRes> => {
+  return instance.post("/pages/agreements");
 };

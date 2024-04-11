@@ -20,12 +20,7 @@ const Footer = () => {
         <div className="flex gap-3 items-center justify-end flex-wrap child:text-xs child-hover:text-primaryYellowHover child:transition-all child:duration-300">
           <Link to={"/pages/aboutUs"}>{t("aboutUs")}</Link>
           <Link to={"/news"}>{t("news")}</Link>
-          <Link to={"/pages/walletRules"}>{t("walletRules")}</Link>
-          <Link to={"/pages/amlPolicy"}>{t("amlPolicy")}</Link>
-          <Link to={"/pages/termsOfService"}>{t("termsOfService")}</Link>
-          <Link to={"/pages/privacyAndSecurity"}>
-            {t("privacyAndSecurity")}
-          </Link>
+          <Link to={"/pages/agreements"}>{t("termsAndConditions")}</Link>
         </div>
       </div>
       <span className="self-end text-sm">© LEADER PAY 2023</span>

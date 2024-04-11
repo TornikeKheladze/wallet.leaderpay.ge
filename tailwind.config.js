@@ -17,12 +17,12 @@ export default withMT({
 
         bg1: "#181A20",
         bgDefault: "#0B0E11",
-        bgCard: "#2B3139",
+        bgCard: "#292B38",
         bg4: "#5E6673",
         bg6: "#20262D",
         bg7: "#191A1F",
 
-        primaryYellow: "#FCD535",
+        primaryYellow: "#F6D658",
         primaryYellowHover: "#F0B90B",
 
         textBlack: "#0B0E11",
@@ -65,6 +65,9 @@ export default withMT({
         // #ffe346;
         leaderGrey: "#212529",
         leaderDark: "#0e0e13",
+        // NEW COLORS
+        lightGray: "#3A3C49",
+        textGray: "#E4E5E6",
       },
     },
   },

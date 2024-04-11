@@ -124,4 +124,24 @@ export const layoutTranslations = {
     ru: "Телефон",
     ka: "ტელეფონი",
   },
+  termsAndConditions: {
+    en: "Conditions of a contract",
+    ru: "Условия контракта",
+    ka: "ხელშეკრულების პირობები",
+  },
+  show: {
+    en: "Show",
+    ru: "Показать",
+    ka: "ჩვენება",
+  },
+  documentName: {
+    en: "Document Name",
+    ru: "Название документа",
+    ka: "დოკუმენტის სახელი",
+  },
+  date: {
+    en: "Date",
+    ru: "Дата",
+    ka: "თარიღი",
+  },
 };
