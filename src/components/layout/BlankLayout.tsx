@@ -65,7 +65,7 @@ const BlankLayout: React.FC<{ children: ReactNode; login?: boolean }> = ({
               src={logoSrc}
               onClick={() => navigate(`${isLoggedIn ? "/home" : "/"}`)}
               alt=""
-              className="absolute z-30 md:w-14 md:top-2 -top-1 left-6 cursor-pointer"
+              className="absolute z-30 w-14 top-2 left-6 cursor-pointer"
             />
           ) : (
             <></>

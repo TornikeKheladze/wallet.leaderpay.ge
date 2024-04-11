@@ -132,7 +132,7 @@ export const layoutTranslations = {
   show: {
     en: "Show",
     ru: "Показать",
-    ka: "ჩვენება",
+    ka: "ნახვა",
   },
   documentName: {
     en: "Document Name",
