@@ -15,10 +15,10 @@ const customTheme: CustomFlowbiteTheme = {
       },
     },
     content: {
-      base: "p-5 first:rounded-t-lg last:rounded-b-lg",
+      base: "p-5 first:rounded-t-lg last:rounded-b-lg accordion-content",
     },
     title: {
-      base: "h-12 hover:text-opacity-80 flex w-full text-sm items-center justify-between py-5 text-left font-medium text-textGray first:rounded-t-lg last:rounded-b-lg",
+      base: "h-12 hover:text-opacity-90 text-opacity-70 flex w-full text-sm items-center justify-between py-5 text-left font-medium text-textGray first:rounded-t-lg last:rounded-b-lg",
       arrow: {
         base: "h-6 w-6 shrink-0",
         open: {
@@ -32,8 +32,8 @@ const customTheme: CustomFlowbiteTheme = {
       },
       heading: "",
       open: {
-        off: "text-opacity-30",
-        on: "",
+        off: "",
+        on: "text-opacity-100",
       },
     },
   },
@@ -47,7 +47,7 @@ function Agreements() {
   });
 
   return (
-    <div className="card p-5 md:mt-10 mt-20 md:!w-[60%]">
+    <div className="card p-5 md:mt-10 mt-20 md:!w-[70%]">
       <h2 className="text-primaryYellow mb-4">{t("termsAndConditions")}</h2>
       <Flowbite theme={{ theme: customTheme }}>
         <Accordion collapseAll={true}>
@@ -66,19 +66,19 @@ function Agreements() {
                   <table className="w-full text-xs">
                     <thead className="text-left text-primaryYellow">
                       <tr className="border-b border-lightGray pb-3">
-                        <th className="w-1/4 pb-2">{t("date")}</th>
-                        <th className="pb-2">{t("status")}</th>
-                        <th className="pb-2">{t("documentName")}</th>
+                        <th className="w-1/6 pb-2">{t("date")}</th>
+                        <th className="w-1/6 pb-2 pr-2">{t("status")}</th>
+                        <th className="pb-2 pr-2 w-1/2">{t("documentName")}</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
                       {agreements.map(({ name, date, file, status }) => (
-                        <tr key={name + date + file}>
+                        <tr className="[&>td]:py-5" key={name + date + file}>
                           <td>{date}</td>
                           <td>{status}</td>
                           <td>{name}</td>
-                          <td>
+                          <td className="flex items-end justify-end">
                             <a
                               className="flex items-center justify-end text-primaryYellow gap-2"
                               href={file}

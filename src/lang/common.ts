@@ -14,6 +14,11 @@ export const layoutTranslations = {
     ru: "НАСТРОЙКИ",
     ka: "პარამეტრები",
   },
+  status: {
+    en: "Status",
+    ru: "Статус",
+    ka: "სტატუსი",
+  },
   services: {
     en: "SERVICES",
     ru: "УСЛУГИ",
