@@ -2,7 +2,7 @@ export type Agreement = {
   date: string;
   file: string;
   name: string;
-  status: string;
+  status_id: number;
 };
 
 export type GetAgreementRes = {

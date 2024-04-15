@@ -15,7 +15,7 @@ const customTheme: CustomFlowbiteTheme = {
       },
     },
     content: {
-      base: "p-5 first:rounded-t-lg last:rounded-b-lg accordion-content",
+      base: "py-3 first:rounded-t-lg last:rounded-b-lg accordion-content",
     },
     title: {
       base: "h-12 hover:text-opacity-90 text-opacity-70 flex w-full text-sm items-center justify-between py-5 text-left font-medium text-textGray first:rounded-t-lg last:rounded-b-lg",
@@ -63,20 +63,33 @@ function Agreements() {
                   </div>
                 </Accordion.Title>
                 <Accordion.Content>
-                  <table className="w-full text-xs">
+                  <table className="w-full text-[10px] md:text-xs">
                     <thead className="text-left text-primaryYellow">
-                      <tr className="border-b border-lightGray pb-3">
-                        <th className="w-1/6 pb-2">{t("date")}</th>
-                        <th className="w-1/6 pb-2 pr-2">{t("status")}</th>
-                        <th className="pb-2 pr-2 w-1/2">{t("documentName")}</th>
+                      <tr className="border-b border-lightGray">
+                        <th className="w-1/4 md:w-1/6 pb-4 md:pr-0 pr-2">
+                          {t("date")}
+                        </th>
+                        <th className="w-1/4 md:w-1/6 pb-4 pr-2">
+                          {t("status")}
+                        </th>
+                        <th className="pb-4 pr-2 w-1/2">{t("documentName")}</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
-                      {agreements.map(({ name, date, file, status }) => (
-                        <tr className="[&>td]:py-5" key={name + date + file}>
+                      {agreements.map(({ name, date, file, status_id }) => (
+                        <tr
+                          className="[&>td]:py-5 [&>td]:align-baseline"
+                          key={name + date + file}
+                        >
                           <td>{date}</td>
-                          <td>{status}</td>
+                          <td
+                            className={` ${
+                              status_id === 1 ? "text-success" : "text-danger"
+                            }`}
+                          >
+                            {status_id === 1 ? t("active") : t("inActive")}
+                          </td>
                           <td>{name}</td>
                           <td className="flex items-end justify-end">
                             <a

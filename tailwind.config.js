@@ -58,7 +58,6 @@ export default withMT({
 
         lightBlack: "#212529",
         customGray: "#A2A5B9",
-        danger: "rgb(220 38 38);",
         // error: "#fbbf24",
         error: "#F6465D",
 
@@ -68,6 +67,8 @@ export default withMT({
         // NEW COLORS
         lightGray: "#3A3C49",
         textGray: "#E4E5E6",
+        success: "#58BA62",
+        danger: "#F25353",
       },
     },
   },

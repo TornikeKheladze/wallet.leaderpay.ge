@@ -19,6 +19,16 @@ export const layoutTranslations = {
     ru: "Статус",
     ka: "სტატუსი",
   },
+  active: {
+    en: "Active",
+    ru: "Активный",
+    ka: "აქტიური",
+  },
+  inActive: {
+    en: "Inactive",
+    ru: "Неактивный",
+    ka: "არააქტიური",
+  },
   services: {
     en: "SERVICES",
     ru: "УСЛУГИ",
