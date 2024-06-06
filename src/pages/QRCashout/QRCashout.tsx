@@ -13,7 +13,6 @@ const QRCashout = () => {
       toast.error(error.response.data.errorMessage);
     },
     retry: false,
-    staleTime: Infinity,
   });
 
   return (
