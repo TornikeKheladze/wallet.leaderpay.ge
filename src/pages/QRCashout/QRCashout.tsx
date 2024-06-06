@@ -3,12 +3,15 @@ import { useTranslate } from "../../hooks/useTranslate";
 import { transferTranslations } from "../../lang/transferTranslations";
 import { qrInit } from "../../services/withdraw";
 import LoadingSpinner from "../../components/layout/loadingSpinner/LoadingSpinner";
+import toast from "react-hot-toast";
 
 const QRCashout = () => {
   const { t } = useTranslate(transferTranslations);
   const { isLoading, data = { url: "" } } = useQuery({
-    queryKey: "qrInit",
     queryFn: () => qrInit().then((res) => res.data),
+    onError: (error: any) => {
+      toast.error(error.response.data.errorMessage);
+    },
     retry: false,
     staleTime: Infinity,
   });
