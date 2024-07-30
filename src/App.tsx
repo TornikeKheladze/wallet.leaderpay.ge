@@ -31,6 +31,8 @@ import Failed from "./pages/Failed/Failed";
 import AddCardSuccessPage from "./pages/Success/AddCardSuccessPage";
 import AddCardFailedPage from "./pages/Failed/AddCardFailedPage";
 import Agreements from "./pages/Agreements/Agreements";
+import Register from "./pages/Register/Register";
+import Verification from "./pages/Verification/Verification";
 
 const route = (
   path: string,
@@ -54,12 +56,12 @@ function App() {
   return (
     <Routes>
       {route("/", <Login />, "blank")}
-      {/* {route("/register", <Register />, "blank")} */}
-      {route(
+      {route("/register", <Register />, "blank")}
+      {/* {route(
         "/register",
         <h1 className="text-center">რეგისტრაცია დროებით გამორთულია</h1>,
         "blank"
-      )}
+      )} */}
       {route("/contact", <Contact />, "blank")}
       <Route path={"register/identomat"} element={<Identomat />} />
       {route("/pages/:page", <Info />, "blank", true)}
@@ -88,8 +90,8 @@ function App() {
       {route("/templates", <Templates />)}
       {route("/profile", <Profile />)}
       {route("/profile/passwordChange", <PasswordChange />)}
-      {/* {route("/profile/verification", <Verification />)} */}
-      {route("/profile/verification", <h1>ვერიფიკაცია დროებით გამორთულია</h1>)}
+      {route("/profile/verification", <Verification />)}
+      {/* {route("/profile/verification", <h1>ვერიფიკაცია დროებით გამორთულია</h1>)} */}
       <Route
         path={"/profile/verification/step2"}
         element={<VerificationStep2 />}
