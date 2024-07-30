@@ -13,9 +13,10 @@ import CloseIcon from "../../assets/icons/CloseIcon";
 import { registerForm } from "../../formArrays/registerForm";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { formTranslations } from "../../lang/formTranslations";
 
 export const useRegister = () => {
-  const { t } = useTranslate(authTranslations);
+  const { t } = useTranslate(authTranslations, formTranslations);
   const navigate = useNavigate();
   const [smsModal, setSmsModal] = useState(false);
   const [smsInput, setSmsInput] = useState("");

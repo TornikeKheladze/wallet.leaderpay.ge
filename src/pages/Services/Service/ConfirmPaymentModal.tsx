@@ -6,11 +6,10 @@ import { RootState } from "../../../store/store";
 import calculate from "../../../helpers/calculate";
 import { formTranslations } from "../../../lang/formTranslations";
 import { UseMutateFunction } from "react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LoadingSpinner from "../../../components/layout/loadingSpinner/LoadingSpinner";
-import RefreshIcon from "../../../assets/icons/RefreshIcon";
-import TimerIcon from "../../../assets/icons/TimerIcon";
 import Modal from "../../../components/modal/Modal";
+import SmsTimer from "../../../components/smsTimer/SmsTimer";
 
 const ConfirmPaymentModal: React.FC<{
   reqPayload: { [key: string]: string | number };
@@ -50,26 +49,6 @@ const ConfirmPaymentModal: React.FC<{
   const submitPayment = () => {
     payMutate({ ...reqPayload, sms: input });
   };
-  const [seconds, setSeconds] = useState(60);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds((prevSeconds) => prevSeconds - 1);
-      } else {
-        clearInterval(interval);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [seconds]);
-
-  const resendHandler = () => {
-    smsMutate();
-    setTimeout(() => {
-      setSeconds(60);
-    }, 500);
-  };
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -99,26 +78,7 @@ const ConfirmPaymentModal: React.FC<{
         </div>
         {infoData.sms ? (
           <div className="relative">
-            {seconds === 0 ? (
-              <button
-                type="button"
-                onClick={resendHandler}
-                className="min-w-[100px] group button_primary absolute right-0 bottom-0 flex items-center justify-center gap-1 text-sm rounded-md h-11"
-              >
-                {smsLoading ? (
-                  <LoadingSpinner />
-                ) : (
-                  <>
-                    <RefreshIcon className="w-5" />
-                    {t("resendSms")}
-                  </>
-                )}
-              </button>
-            ) : (
-              <span className="absolute right-3 bottom-2 flex gap-2 items-center justify-center text-textBlack">
-                {seconds} <TimerIcon />
-              </span>
-            )}
+            <SmsTimer smsLoading={smsLoading} smsMutate={smsMutate} />
 
             <label className="block text-sm font-bold mb-2">
               {t("smsCode")}
