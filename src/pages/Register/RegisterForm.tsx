@@ -249,6 +249,7 @@ const RegisterForm: React.FC<FormProps> = ({
               />
             ) : field.name === "mobile" ? (
               <PhoneInput
+                countryCodeEditable={false}
                 country={"ge"}
                 inputProps={{
                   className: `${
