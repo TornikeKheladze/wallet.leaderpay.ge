@@ -4,6 +4,8 @@ import { getAgreements } from "../../services/infos";
 import { useTranslate } from "../../hooks/useTranslate";
 import ArrowIcon from "../../assets/icons/ArrowIcon";
 import { layoutTranslations } from "../../lang/common";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const customTheme: CustomFlowbiteTheme = {
   accordion: {
@@ -40,10 +42,11 @@ const customTheme: CustomFlowbiteTheme = {
 };
 
 function Agreements() {
+  const { lang } = useSelector((state: RootState) => state.lang);
   const { t } = useTranslate(layoutTranslations);
   const { data = [] } = useQuery({
-    queryKey: "getAgreements",
-    queryFn: () => getAgreements().then((res) => res.data),
+    queryKey: ["getAgreements", lang],
+    queryFn: () => getAgreements({ lang }).then((res) => res.data),
   });
 
   return (

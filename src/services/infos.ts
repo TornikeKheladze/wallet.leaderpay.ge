@@ -41,6 +41,6 @@ export const sendMessage = async (data: any) => {
   return instance.post("/landing/contact", data);
 };
 
-export const getAgreements = async (): Promise<GetAgreementRes> => {
-  return instance.post("/pages/agreements");
+export const getAgreements = (data: any): Promise<GetAgreementRes> => {
+  return instance.post("/pages/agreements", data);
 };
