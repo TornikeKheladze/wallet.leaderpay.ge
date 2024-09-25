@@ -1,0 +1,50 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**'
+
+env:
+  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+  DOCKER_HUB_SECRET: ${{ secrets.DOCKER_HUB_SECRET }}
+  DOCKERFILE_PATH: ${{ vars.DOCKERFILE_PATH }}
+  IMAGE_NAME: ${{ vars.IMAGE_NAME }}
+  CONTAINER_NAME: ${{ vars.CONTAINER_NAME }}
+  CONTAINER_EXPOSE_PORT: ${{ vars.CONTAINER_EXPOSE_PORT }}
+  HOST_EXPOSE_PORT: ${{ vars.HOST_EXPOSE_PORT }}
+
+jobs:
+  build-push-deploy:
+    runs-on: PROD-GH-RUNNER-01
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Build Docker image
+        run: |
+          IMAGE_NAME_LOWER=$(echo $IMAGE_NAME | tr '[A-Z]' 'a-z')
+          VERSION_TAG=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION_TAG=$(echo $VERSION_TAG | sed -e 's/^v//')
+          FULL_DOCKER_IMAGE_NAME=$DOCKER_HUB_USERNAME/$IMAGE_NAME_LOWER:$VERSION_TAG
+          echo "FULL_DOCKER_IMAGE_NAME=$FULL_DOCKER_IMAGE_NAME" >> $GITHUB_ENV
+          sudo docker build . --file $DOCKERFILE_PATH --tag $FULL_DOCKER_IMAGE_NAME
+      - name: Log in to Docker Hub
+        run: |
+          echo "$DOCKER_HUB_SECRET" | sudo docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+      - name: Push Docker image to Docker Hub
+        run: |
+          sudo docker push $FULL_DOCKER_IMAGE_NAME
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ vars.DEPLOY_SERVER_IP }}
+          username: actionsrunner
+          key: ${{ secrets.PROD_RUNNER_SSH_PRIVATE_KEY }}
+          script: |
+            echo "${{ secrets.DOCKER_HUB_SECRET }}" | sudo docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+            sudo docker pull ${{ env.FULL_DOCKER_IMAGE_NAME }}
+            sudo docker stop ${{ vars.CONTAINER_NAME }} || true
+            sudo docker rm -f ${{ vars.CONTAINER_NAME }} || true
+            sudo docker run -d --restart=unless-stopped --name ${{ vars.CONTAINER_NAME }} -p ${{ vars.HOST_EXPOSE_PORT }}:${{ vars.CONTAINER_EXPOSE_PORT }} ${{ env.FULL_DOCKER_IMAGE_NAME }}
