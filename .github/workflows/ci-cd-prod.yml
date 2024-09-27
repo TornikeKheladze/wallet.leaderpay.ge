@@ -42,7 +42,7 @@ jobs:
             sudo docker pull ${{ env.FULL_DOCKER_IMAGE_NAME }}
             sudo docker stop ${{ vars.CONTAINER_NAME }} || true
             sudo docker rm -f ${{ vars.CONTAINER_NAME }} || true
-            sudo docker run -d --restart=unless-stopped --name ${{ vars.CONTAINER_NAME }}
+            sudo docker run -d --restart=unless-stopped --name ${{ vars.CONTAINER_NAME }} \
                             --add-host leaderpay.ge:188.93.89.96 \
                             --add-host wallet.leaderpay.ge:188.93.89.96 \
                             --add-host api.allpayway.ge:188.93.89.96 \
