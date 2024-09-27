@@ -8,8 +8,7 @@ on:
       - '**'
 
 env:
-  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-  DOCKER_HUB_SECRET: ${{ secrets.DOCKER_HUB_SECRET }}
+  LOCAL_DOCKER_REGISTRY: ${{ vars.LOCAL_DOCKER_REGISTRY }}
   DOCKERFILE_PATH: ${{ vars.DOCKERFILE_PATH }}
   IMAGE_NAME: ${{ vars.IMAGE_NAME }}
   CONTAINER_NAME: ${{ vars.CONTAINER_NAME }}
@@ -27,13 +26,10 @@ jobs:
           IMAGE_NAME_LOWER=$(echo $IMAGE_NAME | tr '[A-Z]' 'a-z')
           VERSION_TAG=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION_TAG=$(echo $VERSION_TAG | sed -e 's/^v//')
-          FULL_DOCKER_IMAGE_NAME=$DOCKER_HUB_USERNAME/$IMAGE_NAME_LOWER:$VERSION_TAG
+          FULL_DOCKER_IMAGE_NAME=$LOCAL_DOCKER_REGISTRY/$IMAGE_NAME_LOWER:$VERSION_TAG
           echo "FULL_DOCKER_IMAGE_NAME=$FULL_DOCKER_IMAGE_NAME" >> $GITHUB_ENV
           sudo docker build . --file $DOCKERFILE_PATH --tag $FULL_DOCKER_IMAGE_NAME
-      - name: Log in to Docker Hub
-        run: |
-          echo "$DOCKER_HUB_SECRET" | sudo docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
-      - name: Push Docker image to Docker Hub
+      - name: Push Docker image to Local Registry
         run: |
           sudo docker push $FULL_DOCKER_IMAGE_NAME
       - name: Deploy to Server
@@ -43,8 +39,28 @@ jobs:
           username: actionsrunner
           key: ${{ secrets.PROD_RUNNER_SSH_PRIVATE_KEY }}
           script: |
-            echo "${{ secrets.DOCKER_HUB_SECRET }}" | sudo docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
             sudo docker pull ${{ env.FULL_DOCKER_IMAGE_NAME }}
             sudo docker stop ${{ vars.CONTAINER_NAME }} || true
             sudo docker rm -f ${{ vars.CONTAINER_NAME }} || true
-            sudo docker run -d --restart=unless-stopped --name ${{ vars.CONTAINER_NAME }} -p ${{ vars.HOST_EXPOSE_PORT }}:${{ vars.CONTAINER_EXPOSE_PORT }} ${{ env.FULL_DOCKER_IMAGE_NAME }}
+            sudo docker run -d --restart=unless-stopped --name ${{ vars.CONTAINER_NAME }}
+                            --add-host leaderpay.ge:188.93.89.96 \
+                            --add-host wallet.leaderpay.ge:188.93.89.96 \
+                            --add-host api.allpayway.ge:188.93.89.96 \
+                            --add-host manager.allpayway.ge:188.93.89.96 \
+                            --add-host cashdesk.allpayway.ge:188.93.89.96 \
+                            --add-host leaderbet.allpayway.ge:188.93.89.96 \
+                            --add-host uploads.allpayway.ge:188.93.89.96 \
+                            --add-host allpayway.ge:188.93.89.96 \
+                            --add-host pay.allpayway.ge:188.93.89.96 \
+                            --add-host allpayment.ge:188.93.89.96 \
+                            --add-host api.apw.ge:188.93.89.96 \
+                            --add-host admin.apw.ge:188.93.89.96 \
+                            --add-host apw.ge:188.93.89.96 \
+                            --add-host main.merchant.apw.ge:188.93.89.96 \
+                            --add-host merchant.apw.ge:188.93.89.96 \
+                            --add-host studypay.ge:188.93.89.96 \
+                            --add-host admin.studypay.ge:188.93.89.96 \
+                            --add-host back.studypay.ge:188.93.89.96 \
+                            --add-host devspace.ge:188.93.89.96 \
+                            --add-host back.devspace.ge:188.93.89.96 \
+                            -p ${{ vars.HOST_EXPOSE_PORT }}:${{ vars.CONTAINER_EXPOSE_PORT }} ${{ env.FULL_DOCKER_IMAGE_NAME }}
