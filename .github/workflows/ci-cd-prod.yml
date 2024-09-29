@@ -44,24 +44,25 @@ jobs:
             sudo docker rm -f ${{ vars.CONTAINER_NAME }} || true
             sudo docker run -d --restart=unless-stopped --name ${{ vars.CONTAINER_NAME }} \
                             --add-host mysql-01.allpayway.org:192.168.100.20 \
-                            --add-host leaderpay.ge:188.93.89.96 \
-                            --add-host wallet.leaderpay.ge:188.93.89.96 \
-                            --add-host api.allpayway.ge:188.93.89.96 \
-                            --add-host manager.allpayway.ge:188.93.89.96 \
-                            --add-host cashdesk.allpayway.ge:188.93.89.96 \
-                            --add-host leaderbet.allpayway.ge:188.93.89.96 \
-                            --add-host uploads.allpayway.ge:188.93.89.96 \
-                            --add-host allpayway.ge:188.93.89.96 \
-                            --add-host pay.allpayway.ge:188.93.89.96 \
-                            --add-host allpayment.ge:188.93.89.96 \
-                            --add-host api.apw.ge:188.93.89.96 \
-                            --add-host admin.apw.ge:188.93.89.96 \
-                            --add-host apw.ge:188.93.89.96 \
-                            --add-host main.merchant.apw.ge:188.93.89.96 \
-                            --add-host merchant.apw.ge:188.93.89.96 \
-                            --add-host studypay.ge:188.93.89.96 \
-                            --add-host admin.studypay.ge:188.93.89.96 \
-                            --add-host back.studypay.ge:188.93.89.96 \
-                            --add-host devspace.ge:188.93.89.96 \
-                            --add-host back.devspace.ge:188.93.89.96 \
+                            --add-host leaderpay.ge:192.168.100.30 \
+                            --add-host wallet.leaderpay.ge:192.168.100.30 \
+                            --add-host api.allpayway.ge:192.168.100.30 \
+                            --add-host manager.allpayway.ge:192.168.100.30 \
+                            --add-host cashdesk.allpayway.ge:192.168.100.30 \
+                            --add-host leaderbet.allpayway.ge:192.168.100.30 \
+                            --add-host uploads.allpayway.ge:192.168.100.30 \
+                            --add-host allpayway.ge:192.168.100.30 \
+                            --add-host pay.allpayway.ge:192.168.100.30 \
+                            --add-host allpayment.ge:192.168.100.30 \
+                            --add-host api.apw.ge:192.168.100.30 \
+                            --add-host admin.apw.ge:192.168.100.30 \
+                            --add-host apw.ge:192.168.100.30 \
+                            --add-host main.merchant.apw.ge:192.168.100.30 \
+                            --add-host merchant.apw.ge:192.168.100.30 \
+                            --add-host studypay.ge:192.168.100.30 \
+                            --add-host admin.studypay.ge:192.168.100.30 \
+                            --add-host back.studypay.ge:192.168.100.30 \
+                            --add-host devspace.ge:192.168.100.30 \
+                            --add-host back.devspace.ge:192.168.100.30 \
+                            --add-host screening.payway.ge:192.168.100.30 \
                             -p ${{ vars.HOST_EXPOSE_PORT }}:${{ vars.CONTAINER_EXPOSE_PORT }} ${{ env.FULL_DOCKER_IMAGE_NAME }}
