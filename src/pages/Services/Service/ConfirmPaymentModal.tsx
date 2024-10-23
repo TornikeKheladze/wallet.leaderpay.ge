@@ -1,28 +1,16 @@
 import { useSelector } from "react-redux";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { serviceTranslations } from "../../../lang/serviceTranslations";
-import { FullService, InfoData } from "../../../types/serviceTypes";
 import { RootState } from "../../../store/store";
 import calculate from "../../../helpers/calculate";
 import { formTranslations } from "../../../lang/formTranslations";
-import { UseMutateFunction } from "react-query";
 import { useState } from "react";
 import LoadingSpinner from "../../../components/layout/loadingSpinner/LoadingSpinner";
 import Modal from "../../../components/modal/Modal";
 import SmsTimer from "../../../components/smsTimer/SmsTimer";
+import { ConfirmPaymentModalProps } from "../../../types/propTypes";
 
-const ConfirmPaymentModal: React.FC<{
-  reqPayload: { [key: string]: string | number };
-  payMutate: UseMutateFunction<any, any, any, unknown>;
-  service: FullService;
-  infoData: InfoData;
-  payLoading: boolean;
-  errorMessages: { [key: string]: string };
-  smsLoading: boolean;
-  smsMutate: UseMutateFunction<any, any>;
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({
+const ConfirmPaymentModal: React.FC<ConfirmPaymentModalProps> = ({
   reqPayload,
   service,
   infoData,
@@ -47,7 +35,7 @@ const ConfirmPaymentModal: React.FC<{
   );
 
   const submitPayment = () => {
-    payMutate({ ...reqPayload, sms: input });
+    payMutate({ ...reqPayload, amount: amountInGelValue, sms: input });
   };
 
   return (

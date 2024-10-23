@@ -36,6 +36,8 @@ export const useService = () => {
   const [reqPayload, setReqPayload] = useState({});
   const [successModal, setSuccessModal] = useState(false);
   const [withMerchant, setWithMerchant] = useState<FormField[]>([]);
+  const [showMerchantPaymentButtons, setShowMerchantPaymentButtons] =
+    useState<boolean>(false);
   const [addTemplateData, setAddTemplateData] = useState({});
 
   const { search } = useLocation();
@@ -249,7 +251,11 @@ export const useService = () => {
       if (e.type === "merchant") {
         if (withMerchant.find((field) => field.name === "mFirstName")) {
           // setReqPayload(payload);
-          merchantInitMutate(payload);
+          if (showMerchantPaymentButtons) {
+            merchantInitMutate(payload);
+          } else {
+            setShowMerchantPaymentButtons(true);
+          }
           // setIsOpen(true);
         } else {
           // აქ თუ ავტორიზებული არ არის მაგ შემთხვევაში ემატება მერჩანტის ფილდები
@@ -257,7 +263,11 @@ export const useService = () => {
           if (notAuthorized) {
             setWithMerchant([...fields(), ...merchantFields]);
           } else {
-            merchantInitMutate(payload);
+            if (showMerchantPaymentButtons) {
+              merchantInitMutate(payload);
+            } else {
+              setShowMerchantPaymentButtons(true);
+            }
           }
         }
         return;
@@ -305,8 +315,14 @@ export const useService = () => {
       reqPayload,
       addTemplateData,
       templates,
+      showMerchantPaymentButtons,
     },
-    setStates: { setIsOpen, setSuccessModal, setWithMerchant },
+    setStates: {
+      setIsOpen,
+      setSuccessModal,
+      setWithMerchant,
+      setShowMerchantPaymentButtons,
+    },
     payMutate,
     smsMutate,
     defaultInfoParams,

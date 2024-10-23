@@ -1,5 +1,4 @@
 import { useMutation } from "react-query";
-import BankCardIcon from "../../assets/icons/BankCardIcon";
 import LoadingSpinner from "../../components/layout/loadingSpinner/LoadingSpinner";
 import { useTranslate } from "../../hooks/useTranslate";
 import { transferTranslations } from "../../lang/transferTranslations";
@@ -9,12 +8,17 @@ import { tableTranslations } from "../../lang/tableTranslations";
 import toast from "react-hot-toast";
 import { Tooltip } from "@material-tailwind/react";
 import ErrIcon from "../../assets/icons/ErrIcon";
+import mastercard from "../../assets/icons/mastercard.png";
+import amex from "../../assets/icons/amex.png";
 
 const AddBalance = () => {
   const { t } = useTranslate(transferTranslations, tableTranslations);
   const [amount, setAmount] = useState("");
+  const [activePayment, setActivePayment] = useState<"amex" | "visa" | null>(
+    null
+  );
   const { isLoading, mutate, isSuccess } = useMutation({
-    mutationFn: () => addBalanceWithCard(amount),
+    mutationFn: (data: 1 | 2) => addBalanceWithCard(amount, data),
     onSuccess: (data) => {
       window.location.href = data.data.url;
     },
@@ -66,12 +70,34 @@ const AddBalance = () => {
           className="form_input"
         />
         <button
-          onClick={() => mutate()}
+          onClick={() => {
+            setActivePayment("amex");
+            mutate(2);
+          }}
+          disabled={!amount}
+          className="disabled:cursor-not-allowed border w-full flex justify-between gap-2 items-center rounded-md p-2 border-buttonGray bg-bg4 md:hover:bg-bg1 transition-colors duration-300"
+        >
+          {t("AMEX")}
+          {(isLoading || isSuccess) && activePayment === "amex" ? (
+            <LoadingSpinner />
+          ) : (
+            <img src={amex} alt="amex" className="max-w-[30px]" />
+          )}
+        </button>
+        <button
+          onClick={() => {
+            setActivePayment("visa");
+            mutate(1);
+          }}
           disabled={!amount}
           className="disabled:cursor-not-allowed border mb-3 w-full flex justify-between gap-2 items-center rounded-md p-2 border-buttonGray bg-bg4 md:hover:bg-bg1 transition-colors duration-300"
         >
-          {t("confirm")}
-          {isLoading || isSuccess ? <LoadingSpinner /> : <BankCardIcon />}
+          {t("VISA/MASTERCARD")}
+          {(isLoading || isSuccess) && activePayment === "visa" ? (
+            <LoadingSpinner />
+          ) : (
+            <img src={mastercard} alt="mastercard" className="max-w-[30px]" />
+          )}
         </button>
       </div>
     </>

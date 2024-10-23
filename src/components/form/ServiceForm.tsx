@@ -1,22 +1,13 @@
-import React, { Dispatch, ReactNode, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslate } from "../../hooks/useTranslate";
 import { formTranslations } from "../../lang/formTranslations";
-import { FormField } from "../../types/general";
 import LoadingSpinner from "../layout/loadingSpinner/LoadingSpinner";
 import { merchantFields } from "../../formArrays/buildFormFields";
 import BankCardIcon from "../../assets/icons/BankCardIcon";
-
-type ServiceFormProps = {
-  fields: FormField[];
-  onSubmit: (data: any) => void;
-  loading?: boolean;
-  buttonLabel?: ReactNode;
-  merchantButton: ReactNode;
-  setWithMerchant: Dispatch<SetStateAction<FormField[]>>;
-  defaultValues?: { [key: string]: string };
-  merchantLoading: boolean;
-};
+import { ServiceFormProps } from "../../types/propTypes";
+import mastercard from "../../assets/icons/mastercard.png";
+import amex from "../../assets/icons/amex.png";
+import { useState } from "react";
 
 const ServiceForm: React.FC<ServiceFormProps> = ({
   fields,
@@ -27,6 +18,7 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
   setWithMerchant,
   defaultValues,
   merchantLoading,
+  merchantPaymentButtons,
 }) => {
   const {
     register,
@@ -35,6 +27,10 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
   } = useForm({ defaultValues });
 
   const { t } = useTranslate(formTranslations);
+
+  const [activeMerchantLoading, setActiveMerchantLoading] = useState<
+    "amex" | "visa" | null
+  >(null);
 
   return (
     <form
@@ -132,7 +128,7 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
         >
           {loading ? <LoadingSpinner /> : buttonLabel}
         </button>
-        {merchantButton ? (
+        {merchantButton && !merchantPaymentButtons ? (
           <button
             type="button"
             onClick={() =>
@@ -143,8 +139,48 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
             className="flex items-center justify-between md:justify-center md:gap-3 bg-primaryYellow hover:bg-primaryYellowHover uppercase font-normal cursor-pointer w-full transition-colors duration-300 text-textBlack py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
           >
             <BankCardIcon />
-            {merchantLoading ? <LoadingSpinner /> : t("payWithCard")}
+            {t("payWithCard")}
           </button>
+        ) : (
+          <></>
+        )}
+        {merchantPaymentButtons ? (
+          <>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveMerchantLoading("visa");
+                handleSubmit((formData) =>
+                  onSubmit({ ...formData, payment: 1, type: "merchant" })
+                )();
+              }}
+              className="flex items-center justify-between md:justify-center md:gap-3 bg-primaryYellow hover:bg-primaryYellowHover uppercase font-normal cursor-pointer w-full transition-colors duration-300 text-textBlack py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
+            >
+              <img src={mastercard} alt="mastercard" className="max-w-[30px]" />
+              {merchantLoading && activeMerchantLoading === "visa" ? (
+                <LoadingSpinner />
+              ) : (
+                t("VISA/MASTERCARD")
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveMerchantLoading("amex");
+                handleSubmit((formData) =>
+                  onSubmit({ ...formData, payment: 2, type: "merchant" })
+                )();
+              }}
+              className="flex items-center justify-between md:justify-center md:gap-3 bg-primaryYellow hover:bg-primaryYellowHover uppercase font-normal cursor-pointer w-full transition-colors duration-300 text-textBlack py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
+            >
+              <img src={amex} alt="amex" className="max-w-[30px]" />
+              {merchantLoading && activeMerchantLoading === "amex" ? (
+                <LoadingSpinner />
+              ) : (
+                t("AMEX")
+              )}
+            </button>
+          </>
         ) : (
           <></>
         )}

@@ -107,6 +107,7 @@ const Service = () => {
               merchantLoading={
                 loadings.merchantInitLoading || loadings.merchantIsSuccess
               }
+              merchantPaymentButtons={states.showMerchantPaymentButtons}
             />
           )}
           <p
