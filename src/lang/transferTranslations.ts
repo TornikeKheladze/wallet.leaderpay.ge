@@ -94,4 +94,9 @@ export const transferTranslations = {
     en: "Deposit limit limit min 5 Lari max 1000 Lari, withdrawal limit 10 Lari max 1500 Lari",
     ru: "Лимит депозита мин 5 лари макс 1000 лари, лимит вывода 10 лари макс 1500 лари",
   },
+  otherCard: {
+    en: "Other card",
+    ru: "Другая карта",
+    ka: "სხვა ბარათი",
+  },
 };

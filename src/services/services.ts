@@ -48,7 +48,7 @@ export const merchantPay = (
 
 export const addBalanceWithCard = (
   amount: string,
-  payment: 1 | 2
+  payment: 1 | 2 | 3
 ): Promise<{ data: { url: string } }> => {
   return instance.post("/merchant/initWallet", { amount, payment });
 };

@@ -8,6 +8,7 @@ import { ServiceFormProps } from "../../types/propTypes";
 import mastercard from "../../assets/icons/mastercard.png";
 import amex from "../../assets/icons/amex.png";
 import { useState } from "react";
+import { transferTranslations } from "../../lang/transferTranslations";
 
 const ServiceForm: React.FC<ServiceFormProps> = ({
   fields,
@@ -26,10 +27,10 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
     formState: { errors },
   } = useForm({ defaultValues });
 
-  const { t } = useTranslate(formTranslations);
+  const { t } = useTranslate(formTranslations, transferTranslations);
 
   const [activeMerchantLoading, setActiveMerchantLoading] = useState<
-    "amex" | "visa" | null
+    "amex" | "visa" | "other" | null
   >(null);
 
   return (
@@ -124,7 +125,7 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
               )();
             }
           }}
-          className="flex items-center justify-between md:justify-center md:gap-3 bg-primaryYellow hover:bg-primaryYellowHover uppercase font-normal cursor-pointer w-full transition-colors duration-300 text-textBlack py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
+          className="flex items-center self-start justify-between md:justify-center md:gap-3 bg-primaryYellow hover:bg-primaryYellowHover uppercase font-normal cursor-pointer w-full transition-colors duration-300 text-textBlack py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
         >
           {loading ? <LoadingSpinner /> : buttonLabel}
         </button>
@@ -145,7 +146,7 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
           <></>
         )}
         {merchantPaymentButtons ? (
-          <>
+          <div className="flex flex-col md:gap-4 gap-2">
             <button
               type="button"
               onClick={() => {
@@ -180,7 +181,24 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
                 t("AMEX")
               )}
             </button>
-          </>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveMerchantLoading("other");
+                handleSubmit((formData) =>
+                  onSubmit({ ...formData, payment: 3, type: "merchant" })
+                )();
+              }}
+              className="flex items-center justify-between md:justify-center md:gap-3 bg-primaryYellow hover:bg-primaryYellowHover uppercase font-normal cursor-pointer w-full transition-colors duration-300 text-textBlack py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
+            >
+              <BankCardIcon />
+              {merchantLoading && activeMerchantLoading === "other" ? (
+                <LoadingSpinner />
+              ) : (
+                t("otherCard")
+              )}
+            </button>
+          </div>
         ) : (
           <></>
         )}

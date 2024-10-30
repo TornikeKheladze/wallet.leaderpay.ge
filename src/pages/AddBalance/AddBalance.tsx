@@ -10,15 +10,16 @@ import { Tooltip } from "@material-tailwind/react";
 import ErrIcon from "../../assets/icons/ErrIcon";
 import mastercard from "../../assets/icons/mastercard.png";
 import amex from "../../assets/icons/amex.png";
+import BankCardIcon from "../../assets/icons/BankCardIcon";
 
 const AddBalance = () => {
   const { t } = useTranslate(transferTranslations, tableTranslations);
   const [amount, setAmount] = useState("");
-  const [activePayment, setActivePayment] = useState<"amex" | "visa" | null>(
-    null
-  );
+  const [activePayment, setActivePayment] = useState<
+    "amex" | "visa" | "other" | null
+  >(null);
   const { isLoading, mutate, isSuccess } = useMutation({
-    mutationFn: (data: 1 | 2) => addBalanceWithCard(amount, data),
+    mutationFn: (data: 1 | 2 | 3) => addBalanceWithCard(amount, data),
     onSuccess: (data) => {
       window.location.href = data.data.url;
     },
@@ -90,13 +91,28 @@ const AddBalance = () => {
             mutate(1);
           }}
           disabled={!amount}
-          className="disabled:cursor-not-allowed border mb-3 w-full flex justify-between gap-2 items-center rounded-md p-2 border-buttonGray bg-bg4 md:hover:bg-bg1 transition-colors duration-300"
+          className="disabled:cursor-not-allowed border w-full flex justify-between gap-2 items-center rounded-md p-2 border-buttonGray bg-bg4 md:hover:bg-bg1 transition-colors duration-300"
         >
           {t("VISA/MASTERCARD")}
           {(isLoading || isSuccess) && activePayment === "visa" ? (
             <LoadingSpinner />
           ) : (
             <img src={mastercard} alt="mastercard" className="max-w-[30px]" />
+          )}
+        </button>
+        <button
+          onClick={() => {
+            setActivePayment("other");
+            mutate(3);
+          }}
+          disabled={!amount}
+          className="disabled:cursor-not-allowed border mb-3 w-full flex justify-between gap-2 items-center rounded-md p-2 border-buttonGray bg-bg4 md:hover:bg-bg1 transition-colors duration-300"
+        >
+          {t("otherCard")}
+          {(isLoading || isSuccess) && activePayment === "other" ? (
+            <LoadingSpinner />
+          ) : (
+            <BankCardIcon />
           )}
         </button>
       </div>
